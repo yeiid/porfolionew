@@ -1,0 +1,22 @@
+:root {
+  /* Modo Claro (predeterminado) */
+  --bg: #ffffff;
+  --text: #333333;
+  --primary: #0070f3;
+  --secondary: #7928ca;
+}
+
+.dark {
+  /* Modo Oscuro */
+  --bg: #333333;
+  --text: #ffffff;
+  --primary: #7928ca;
+  --secondary: #0070f3;
+}
+
+/* Ejemplo de uso global */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

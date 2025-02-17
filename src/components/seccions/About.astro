@@ -1,0 +1,116 @@
+---
+import SkillCard from '../SkillCard.svelte';
+
+const skills = [
+  { name: 'Inteligencia Artificial', icon: '🧠', level: 95 },
+  { name: 'Machine Learning', icon: '🤖', level: 90 },
+  { name: 'Visión por Computadora', icon: '👁️', level: 85 },
+  { name: 'Procesamiento de Lenguaje', icon: '💬', level: 88 }
+];
+
+const bio = `
+Soy un desarrollador especializado en soluciones de IA con más de 5 años de experiencia 
+creando sistemas inteligentes. Mi pasión es transformar ideas complejas en aplicaciones 
+prácticas usando lo último en tecnologías de aprendizaje automático.
+`;
+---
+
+<section id="about" class="about-section">
+  <div class="container">
+    <h2 class="section-title">Sobre Mí</h2>
+    
+    <div class="about-grid">
+      <div class="profile-content">
+        <div class="bio">
+          <p class="bio-text">{bio}</p>
+          <div class="experience">
+            <div class="experience-item">
+              <span class="number">5+</span>
+              <span class="label">Años de Experiencia</span>
+            </div>
+            <div class="experience-item">
+              <span class="number">50+</span>
+              <span class="label">Proyectos Completados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skills-container">
+        <div class="skills-grid">
+          {skills.map(skill => (
+            <SkillCard 
+              name={skill.name} 
+              icon={skill.icon} 
+              level={skill.level} 
+              client:load 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: rgba(var(--primary), 0.03);
+    padding: 6rem 0;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .bio-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text);
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .experience {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .experience-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .label {
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

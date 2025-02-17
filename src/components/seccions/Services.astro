@@ -1,0 +1,58 @@
+---
+import ServiceCard from '../ServiceCard.svelte';
+
+interface Service {
+  title: string;
+  icon: string;
+  desc: string;
+}
+
+const services: Service[] = [
+  {
+    title: "Machine Learning",
+    icon: "🤖",
+    desc: "Desarrollo de modelos predictivos y sistemas de recomendación"
+  },
+  {
+    title: "Computer Vision",
+    icon: "👁️",
+    desc: "Soluciones de visión artificial para procesamiento de imágenes"
+  },
+  {
+    title: "NLP",
+    icon: "💬",
+    desc: "Procesamiento de lenguaje natural y chatbots inteligentes"
+  }
+];
+---
+
+<section id="services" class="services-section">
+  <h2 class="section-title">Servicios</h2>
+  <div class="cards-container">
+    {services.map((service) => (
+      <ServiceCard {...service} client:load />
+    ))}
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+</style>

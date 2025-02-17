@@ -1,0 +1,44 @@
+:root {
+    --bg: #ffc1c1;
+    --text: #0f172a;
+    --primary: #3b82f6;
+    --secondary: #8b5cf6;
+    --accent: #10b981;
+    --max-width: 1200px;
+  }
+  
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --text: #f8fafc;
+    --primary: #818cf8;
+    --secondary: #a855f7;
+    --accent: #34d399;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  section {
+    padding: 6rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
