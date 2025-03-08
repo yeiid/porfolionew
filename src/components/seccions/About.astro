@@ -1,44 +1,114 @@
 ---
 import SkillCard from '../SkillCard.svelte';
 
-const skills = [
-  { name: 'Inteligencia Artificial', icon: '🧠', level: 95 },
-  { name: 'Machine Learning', icon: '🤖', level: 90 },
-  { name: 'Visión por Computadora', icon: '👁️', level: 85 },
-  { name: 'Procesamiento de Lenguaje', icon: '💬', level: 88 }
-];
+// Habilidades organizadas por categoría
+const skillCategories = {
+  frontend: [
+    { name: 'JavaScript', icon: '🟨', level: 95 },
+    { name: 'HTML & CSS', icon: '🖌️', level: 95 },
+    { name: 'React', icon: '⚛️', level: 88 },
+    { name: 'Svelte', icon: '💫', level: 85 }
+  ],
+  backend: [
+    { name: 'Node.js', icon: '🟩', level: 90 },
+    { name: 'Python', icon: '🐍', level: 92 },
+    { name: 'Flask', icon: '🔥', level: 85 }
+  ]
+};
 
 const bio = `
-Soy un desarrollador especializado en soluciones de IA con más de 5 años de experiencia 
-creando sistemas inteligentes. Mi pasión es transformar ideas complejas en aplicaciones 
-prácticas usando lo último en tecnologías de aprendizaje automático.
+Soy un desarrollador full-stack con amplia experiencia en el desarrollo web, tanto en el frontend como en el backend.
+He trabajado con tecnologías modernas como Node.js, Python y frameworks como Flask y React, transformando ideas en soluciones digitales efectivas y escalables.
 `;
 ---
+
+<style>
+  /* Mantén los estilos existentes y añade estos */
+  .skills-container {
+    display: grid;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .skill-category {
+    background: rgba(var(--primary), 0.03);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(var(--primary), 0.1);
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .category-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .skill-category {
+      padding: 1.5rem;
+    }
+    
+    .category-title {
+      font-size: 1.3rem;
+    }
+  }
+</style>
 
 <section id="about" class="about-section">
   <div class="container">
     <h2 class="section-title">Sobre Mí</h2>
     
-    <div class="about-grid">
-      <div class="profile-content">
-        <div class="bio">
-          <p class="bio-text">{bio}</p>
-          <div class="experience">
-            <div class="experience-item">
-              <span class="number">5+</span>
-              <span class="label">Años de Experiencia</span>
-            </div>
-            <div class="experience-item">
-              <span class="number">50+</span>
-              <span class="label">Proyectos Completados</span>
-            </div>
-          </div>
+    <img 
+      src="/perfil.png" 
+      alt="Foto de perfil" 
+      class="profile-image"
+      loading="lazy"
+      width="512"
+      height="512"
+    />
+    
+    <div class="bio-content">
+      <p class="bio-text">{bio}</p>
+      <div class="experience">
+        <!-- ... mantén los elementos de experiencia ... -->
+      </div>
+    </div>
+    
+    <div class="skills-container">
+      <!-- Sección Frontend -->
+      <div class="skill-category">
+        <h3 class="category-title">Frontend</h3>
+        <div class="skills-grid">
+          {skillCategories.frontend.map(skill => (
+            <SkillCard 
+              name={skill.name} 
+              icon={skill.icon} 
+              level={skill.level} 
+              client:load 
+            />
+          ))}
         </div>
       </div>
-      
-      <div class="skills-container">
+
+      <!-- Sección Backend -->
+      <div class="skill-category">
+        <h3 class="category-title">Backend</h3>
         <div class="skills-grid">
-          {skills.map(skill => (
+          {skillCategories.backend.map(skill => (
             <SkillCard 
               name={skill.name} 
               icon={skill.icon} 
@@ -51,66 +121,3 @@ prácticas usando lo último en tecnologías de aprendizaje automático.
     </div>
   </div>
 </section>
-
-<style>
-  .about-section {
-    background: rgba(var(--primary), 0.03);
-    padding: 6rem 0;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .bio-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text);
-    opacity: 0.9;
-    margin-bottom: 2rem;
-  }
-
-  .experience {
-    display: flex;
-    gap: 3rem;
-    margin-top: 2rem;
-  }
-
-  .experience-item {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--bg);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  }
-
-  .number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .label {
-    font-size: 0.9rem;
-    color: var(--text);
-    opacity: 0.8;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

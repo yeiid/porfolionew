@@ -1,17 +1,12 @@
 :root {
-  /* Modo Claro (predeterminado) */
   --bg: #ffffff;
-  --text: #333333;
-  --primary: #0070f3;
-  --secondary: #7928ca;
+  --text: #0f172a;
+  --primary: #3b82f6;
 }
-
-.dark {
-  /* Modo Oscuro */
-  --bg: #333333;
-  --text: #ffffff;
-  --primary: #7928ca;
-  --secondary: #0070f3;
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #f8fafc;
+  --primary: #818cf8;
 }
 
 /* Ejemplo de uso global */

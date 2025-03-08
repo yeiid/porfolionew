@@ -5,28 +5,79 @@ import ThemeToggle from '../components/ThemeToggle.svelte';
 ---
 
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Portafolio</title>
   <link rel="stylesheet" href="/styles/global.css">
-
-  <script>
-    (function() {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    })();
-  </script>
 </head>
 <body>
   <Header />
   <ThemeToggle client:load />
   
-  <main class="container">
-    <slot />
+  <main class="main-content">
+    <div class="container">
+      <slot />
+    </div>
   </main>
   
   <Footer />
+
+  <script>
+    // Theme initialization (mejorado)
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      // Actualizar el toggle si existe
+      const themeToggle = document.querySelector('ThemeToggle');
+      if(themeToggle) {
+        themeToggle.setAttribute('theme', savedTheme);
+      }
+    })();
+  </script>
 </body>
 </html>
+
+<style>
+  .main-content {
+    padding-top: var(--header-height); /* Previene solapamiento con header fijo */
+    min-height: calc(100vh - var(--header-height));
+  }
+  /* Mejoras en la transición de temas */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  /* Ajustes de color para mejor contraste */
+  [data-theme="light"] {
+    --bg: #f8fafc; /* Color más neutro que el rosa */
+    --text: #0f172a;
+    --primary: #2563eb; /* Azul más profesional */
+    --secondary: #7c3aed;
+    --accent: #059669;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --text: #f8fafc;
+    --primary: #818cf8;
+    --secondary: #a855f7;
+    --accent: #34d399;
+  }
+
+  /* Mejoras en la tipografía */
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    section {
+      padding: 4rem 0;
+      min-height: auto;
+    }
+  }
+</style>

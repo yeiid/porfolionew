@@ -5,6 +5,7 @@
     --secondary: #8b5cf6;
     --accent: #10b981;
     --max-width: 1200px;
+    --header-height: 80px;
   }
   
   [data-theme="dark"] {
