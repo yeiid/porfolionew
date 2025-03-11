@@ -1,0 +1,337 @@
+---
+// src/components/sections/Certifications.astro
+const certifications = [
+  { 
+    id: 1,
+    type: 'experience',
+    title: 'Desarrollador Freelance',
+    year: '2020-Presente',
+    description: 'Trabajo independiente en proyectos web',
+    icon: '💼'
+  },
+  {
+    id: 2,
+    type: 'education',
+    title: 'Certificado Python',
+    year: '2022',
+    description: 'Python Professional Certification',
+    icon: '🐍'
+  },
+  {
+    id: 3,
+    type: 'experience',
+    title: 'Full Stack Developer',
+    year: '2019-2020',
+    description: 'En empresa tecnológica',
+    icon: '👨💻'
+  },
+  {
+    id: 4,
+    type: 'education',
+    title: 'React Avanzado',
+    year: '2021',
+    description: 'Certificación Udemy',
+    icon: '⚛️'
+  },
+  {
+    id: 5,
+    type: 'experience',
+    title: 'React Avanzado',
+    year: '2021',
+    description: 'Certificación Udemy',
+    icon: '⚛️'
+  }
+];
+
+const experiences = certifications.filter(cert => cert.type === 'experience');
+const educations = certifications.filter(cert => cert.type === 'education');
+---
+
+<section id="certifications" class="certifications-section">
+  <div class="container">
+    <h2 class="section-title">Trayectoria</h2>
+    
+    <div class="slider">
+      <input type="radio" name="slider" id="slide-experience" checked>
+      <input type="radio" name="slider" id="slide-education">
+      
+      <div class="slider-nav">
+        <label for="slide-experience" class="nav-btn">Experiencia</label>
+        <label for="slide-education" class="nav-btn">Educación</label>
+      </div>
+      
+      <div class="slides">
+        <div class="slide">
+          {experiences.map((cert, index) => (
+            <div class="cert-card" style={`--delay: ${index * 0.1}s`}>
+              <div class="cert-content">
+                <span class="cert-icon">{cert.icon}</span>
+                <div class="cert-text">
+                  <h3 class="cert-title">{cert.title}</h3>
+                  <p class="cert-year">{cert.year}</p>
+                  <p class="cert-description">{cert.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="slide">
+          {educations.map((cert, index) => (
+            <div class="cert-card" style={`--delay: ${index * 0.1}s`}>
+              <div class="cert-content">
+                <span class="cert-icon">{cert.icon}</span>
+                <div class="cert-text">
+                  <h3 class="cert-title">{cert.title}</h3>
+                  <p class="cert-year">{cert.year}</p>
+                  <p class="cert-description">{cert.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --card-delay: 0.3s;
+  }
+
+  .certifications-section {
+    padding: 6rem 1rem;
+    background: rgba(var(--primary), 0.03);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slider input {
+    display: none;
+  }
+
+  .slider-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .nav-btn {
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background: rgba(var(--primary), 0.1);
+    color: var(--text);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    border: 2px solid transparent;
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary), 0.1);
+  }
+
+  #slide-experience:checked ~ .slider-nav label[for="slide-experience"],
+  #slide-education:checked ~ .slider-nav label[for="slide-education"] {
+    background: var(--primary);
+    color: var(--bg);
+    border-color: rgba(var(--secondary), 0.3);
+  }
+
+  .slides {
+    display: flex;
+    width: 200%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #slide-education:checked ~ .slides {
+    transform: translateX(-50%);
+  }
+
+  .slide {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .cert-card {
+    background: var(--bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardEntrance 0.6s ease var(--delay) forwards;
+  }
+
+  @keyframes cardEntrance {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .cert-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cert-icon {
+    font-size: 2rem;
+    min-width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--primary), 0.1);
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .cert-card:hover .cert-icon {
+    transform: rotate(15deg) scale(1.1);
+  }
+
+  .cert-text {
+    flex: 1;
+  }
+
+  .cert-title {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-year {
+    color: var(--text);
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+
+  .cert-description {
+    margin-top: 0.8rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .slider-nav {
+      flex-direction: column;
+    }
+
+    .nav-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .slide {
+      grid-template-columns: 1fr;
+    }
+
+    .cert-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cert-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .certifications-section {
+      padding: 4rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .cert-card {
+      padding: 1.2rem;
+    }
+
+    .cert-icon {
+      width: 45px;
+      height: 45px;
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.slider');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Swipe para móviles
+    slider.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchmove', e => {
+      touchEndX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', () => {
+      const diffX = touchStartX - touchEndX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          document.getElementById('slide-experience').checked = true;
+        } else {
+          document.getElementById('slide-education').checked = true;
+        }
+      }
+    });
+
+    // Efecto hover para desktop
+    if (window.innerWidth > 768) {
+      document.querySelectorAll('.cert-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+  });
+</script>
