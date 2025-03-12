@@ -8,26 +8,84 @@
 </section>
 
 <style>
+
   .hero {
+    position: relative;
+    padding: 8rem 1rem;
     text-align: center;
-    padding: 4rem 0;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
   }
   
+  /* Fondo animado basado en las variables del tema */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+    opacity: 0.3;
+    animation: slide 10s ease infinite;
+    z-index: -1;
+  }
+  
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20%); }
+    100% { transform: translateX(0); }
+  }
+  
+  /* Contenedor para centrar y limitar el contenido */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Título principal con sombra y efecto de transición */
   .hero-title {
     font-size: 4rem;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
   }
   
+  .hero-title:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Texto con gradiente que se adapta a las variables */
   .gradient-text {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
-    /* -webkit-text-fill-color: transparent; */
+    -webkit-text-fill-color: transparent;
+    transition: filter 0.3s ease;
   }
   
+  .gradient-text:hover {
+    filter: brightness(1.2);
+  }
+  
+  /* Subtítulo */
   .hero-subtitle {
     font-size: 1.5rem;
+    margin-top: 1rem;
     color: var(--text);
-    opacity: 0.8;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
   }
 </style>

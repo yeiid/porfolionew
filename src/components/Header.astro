@@ -1,17 +1,15 @@
 ---
-   const logo = "/public/logo.ico"
+import { Image } from "astro:assets";
+
 ---
-
-
 <nav class="header">
   <div class="container">
-    <a href="#" class="logo-link">
-      <img 
-        class="img_logo" 
-        src={logo} 
-        alt="Logo Portfolio" 
-        width="70" 
-        height="70"
+    <a href="/" class="logo-link">
+      <Image class="img_logo"
+        src="/logo.ico"
+        alt="Logo Portfolio"
+        loading="eager" 
+        width={70} height={70}
       />
     </a>
     <button class="menu-toggle" >

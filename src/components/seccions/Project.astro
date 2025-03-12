@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 interface Project {
   title: string;
   image: string;
@@ -9,19 +10,19 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Ecoraices",
-    image: "/public/ecoraices-web.png",
-    description: "Descripción breve del Proyecto 1.",
+    image: "/ecoraices-web.png",
+    description: "Aplicación web para registrar árboles geolocalizados. Permite login, registro de usuarios, perfiles personalizados, modificación de datos y subida de fotos Tecnologías: Flask, SQLAlchemy, HTML, CSS, JavaScript, Bootstrap, OpenStreetMap.",
     link: "https://ecoraices-proyect.vercel.app/"
   },
   {
     title: "Jamuche",
-    image: "/public/jamuche.png",
-    description: "Descripción breve del Proyecto 2.",
+    image: "/jamuche.png",
+    description: "Descripción: Jamuche es una plataforma de comercio electrónico diseñada para ofrecer una experiencia rápida y eficiente de compra y venta de productos. Su objetivo es proporcionar un sistema escalable y fácil de usar, con una interfaz optimizada para navegadores y dispositivos móviles.",
     link: "https://jamuchee.vercel.app/"
   },
   {
     title: "Encriptardor",
-    image: "/public/encriptardor.png",
+    image: "/encriptardor.png",
     description: "Descripción breve del Proyecto 3.",
     link: "https://encriptador-alura-oracle-one.vercel.app/"
   }
@@ -37,14 +38,15 @@ const projects: Project[] = [
           <h3 class="project-title">{project.title}</h3>
         </header>
         <figure class="project-image">
-          <img 
-            src={project.image} 
-            alt={`Vista previa del proyecto ${project.title}`} 
-            loading="lazy" 
-          />
+          <Image src={project.image} 
+          alt={`Vista previa del proyecto ${project.title}`} 
+          format="ico" 
+          width={400} height={300}
+          loading="lazy"  />
+
         </figure>
         <div class="project-content">
-          <p class="project-description">{project.description}</p>
+          <p class="project-description ">Descripción: {project.description}</p>
           <a 
             href={project.link} 
             class="project-link" 
@@ -119,9 +121,11 @@ const projects: Project[] = [
   }
 
   .project-description {
-    margin-bottom: 1rem;
+    margin: 1rem;
+    line-height: 1.6; 
+    text-align: center;
+    font-size: 1rem;
     color: var(--text);
-    line-height: 1.6;
   }
 
   .project-link {

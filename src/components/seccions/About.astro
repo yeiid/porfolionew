@@ -1,5 +1,6 @@
 ---
 import SkillCard from '../SkillCard.svelte';
+import { Image } from "astro:assets";
 
 // Habilidades organizadas por categoría
 const skillCategories = {
@@ -30,8 +31,7 @@ He trabajado con tecnologías modernas como Node.js, Python y frameworks como Fl
     margin-top: 2rem;
   }
   .profile-image {
-    width: 300px;
-    height: 300px;
+
     object-fit: cover;
     border-radius: 50%;
     margin: 2rem auto;
@@ -86,13 +86,12 @@ He trabajado con tecnologías modernas como Node.js, Python y frameworks como Fl
   <div class="container">
     <h2 class="section-title">Sobre Mí</h2>
     
-    <img 
+    <Image 
       src="/perfil.png" 
       alt="Foto de perfil" 
       class="profile-image"
       loading="lazy"
-      width="512"
-      height="512"
+      width={300} height={300}
     />
     
     <div class="bio-content">
