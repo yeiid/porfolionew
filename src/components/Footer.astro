@@ -28,7 +28,7 @@ const currentYear = new Date().getFullYear();
 
     <div class="footer-bottom">
       <p class="copyright">© {currentYear} Yeifran Hernandez. Todos los derechos reservados.</p>
-      <a href="#top" class="back-to-top">↑</a>
+      <a href="#top" class="back-to-top" id="back-to-top">↑</a>
     </div>
   </div>
 </footer>
@@ -139,15 +139,38 @@ const currentYear = new Date().getFullYear();
   }
 
   .back-to-top {
-    color: var(--primary);
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: var(--primary);
+    color: white;
     text-decoration: none;
     font-size: 1.5rem;
-    padding: 0.5rem;
-    transition: transform 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-weight: bold;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .back-to-top:hover {
     transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+    background: var(--secondary);
   }
 
   @media (max-width: 768px) {
@@ -165,5 +188,39 @@ const currentYear = new Date().getFullYear();
       gap: 1rem;
       text-align: center;
     }
+
+    .back-to-top {
+      bottom: 1.5rem;
+      left: 1.5rem;
+      width: 45px;
+      height: 45px;
+      font-size: 1.3rem;
+    }
   }
 </style>
+
+<script>
+  // Show/hide back-to-top button based on scroll position
+  const backToTopButton = document.getElementById('back-to-top');
+  
+  function toggleBackToTop() {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    
+    // Show button when user is in the last 30% of the page
+    const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
+    
+    if (scrollPercentage > 0.7) {
+      backToTopButton?.classList.add('visible');
+    } else {
+      backToTopButton?.classList.remove('visible');
+    }
+  }
+  
+  // Check on scroll
+  window.addEventListener('scroll', toggleBackToTop);
+  
+  // Check on page load
+  document.addEventListener('DOMContentLoaded', toggleBackToTop);
+</script>

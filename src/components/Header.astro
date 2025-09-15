@@ -1,25 +1,38 @@
 ---
-import { Image } from "astro:assets";
-
+import TranslatedText from './TranslatedText.svelte';
 ---
 <nav class="header">
   <div class="container">
     <a href="/" class="logo-link">
-      <Image class="img_logo"
+      <img class="img_logo"
         src="/logo.ico"
-        alt="Logo Portfolio"
+        alt="Portfolio logo of Yeifran Hernandez"
         loading="eager" 
-        width={70} height={70}
+        width="70" height="70"
       />
     </a>
     <button class="menu-toggle" >
       <span class="hamburger"></span>
     </button>
     <div class="nav-links">
-      <a href="#About" class="nav-link">About</a>
-      <a href="#services" class="nav-link">Servicios</a>
-      <a href="#projects" class="nav-link">Proyectos</a>
-      <a href="#contact" class="nav-link">Contacto</a>
+      <a href="#about" class="nav-link">
+        <TranslatedText key="navAbout" fallback="About" client:load />
+      </a>
+      <a href="#projects" class="nav-link">
+        <TranslatedText key="navProjects" fallback="Projects" client:load />
+      </a>
+      <a href="#certifications" class="nav-link">
+        <TranslatedText key="navCareer" fallback="Career" client:load />
+      </a>
+      <a href="#services" class="nav-link">
+        <TranslatedText key="navServices" fallback="Services" client:load />
+      </a>
+      <a href="#contact" class="nav-link">
+        <TranslatedText key="navContact" fallback="Contact" client:load />
+      </a>
+    </div>
+    <div class="header-actions">
+      <!-- Language toggle moved to bottom of page -->
     </div>
   </div>
 </nav>
@@ -40,8 +53,14 @@ import { Image } from "astro:assets";
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
   .nav-links {
     display: flex;
@@ -75,7 +94,7 @@ import { Image } from "astro:assets";
   }
   
   .hamburger {
-    color: aqua;
+    color: var(--text);
     display: block;
     width: 25px;
     height: 3px;
@@ -125,6 +144,10 @@ import { Image } from "astro:assets";
     
     .menu-toggle {
       display: block;
+    }
+    
+    .header-actions {
+      order: -1;
     }
   }
 </style>

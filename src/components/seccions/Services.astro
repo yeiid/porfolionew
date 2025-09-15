@@ -1,34 +1,51 @@
 ---
 import ServiceCard from '../ServiceCard.svelte';
+import TranslatedText from '../TranslatedText.svelte';
 
+// Services will use translation keys
 const services = [
   {
-    title: "Desarrollo Web",
-    icon: "💻",
-    desc: "Construyo sitios web modernos, responsivos y optimizados, enfocados en mejorar la experiencia del usuario y la conversión de clientes."
+    titleKey: "frontendDev",
+    descKey: "frontendDesc",
+    icon: "⚛️"
   },
   {
-    title: "Asesoría",
-    icon: "🧠",
-    desc: "Brindo consultorías personalizadas para optimizar tu presencia digital y estrategias de marketing, impulsando el crecimiento de tu negocio."
+    titleKey: "backendDev",
+    descKey: "backendDesc",
+    icon: "🔧"
   },
   {
-    title: "Implementación de Ideas",
-    icon: "🚀",
-    desc: "Transformo ideas innovadoras en proyectos tangibles, acompañándote desde el concepto hasta la implementación final."
+    titleKey: "fullStackSolutions",
+    descKey: "fullStackDesc",
+    icon: "🚀"
+  },
+  {
+    titleKey: "desktopApps",
+    descKey: "desktopDesc",
+    icon: "🖥️"
   }
 ];
 ---
 
 <section id="services" class="services-section">
   <div class="container">
-    <h2 class="section-title">Servicios Profesionales</h2>
+    <h2 class="section-title">
+      <TranslatedText key="servicesTitle" fallback="Services" client:load />
+    </h2>
     <p class="section-subtitle">
-      Soluciones integrales para potenciar tu negocio y generar ingresos sostenibles como freelance.
+      <TranslatedText key="servicesSubtitle" fallback="Comprehensive solutions to build modern, scalable applications with cutting-edge technologies." client:load />
     </p>
     <div class="cards-container">
       {services.map(service => (
-        <ServiceCard {...service} client:load />
+        <div class="service-card">
+          <div class="service-icon">{service.icon}</div>
+          <h3 class="service-title">
+            <TranslatedText key={service.titleKey} fallback="Service" client:load />
+          </h3>
+          <p class="service-desc">
+            <TranslatedText key={service.descKey} fallback="Service description" client:load />
+          </p>
+        </div>
       ))}
     </div>
   </div>
@@ -58,7 +75,41 @@ const services = [
   
   .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--bg);
+    border: 1px solid rgba(var(--primary), 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+
+  .service-desc {
+    color: var(--text);
+    opacity: 0.8;
+    line-height: 1.6;
   }
 </style>

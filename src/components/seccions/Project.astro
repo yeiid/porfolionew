@@ -5,35 +5,59 @@ interface Project {
   image: string;
   description: string;
   link: string;
+  technologies: string[];
 }
 
 const projects: Project[] = [
   {
-    title: "Ecoraices",
+    title: "EcoRaíces",
     image: "/ecoraices-web.png",
-    description: "Aplicación web para registrar árboles geolocalizados. Permite login, registro de usuarios, perfiles personalizados, modificación de datos y subida de fotos Tecnologías: Flask, SQLAlchemy, HTML, CSS, JavaScript, Bootstrap, OpenStreetMap.",
-    link: "https://ecoraices-proyect.vercel.app/"
+    description: "Web application for registering geolocated trees. Features user authentication, personalized profiles, data modification, and photo uploads with interactive maps for tree geolocation.",
+    link: "https://ecoraices-proyect.vercel.app/",
+    technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "NextAuth", "Prisma", "SQLite", "Zustand", "Vercel"]
   },
   {
     title: "Jamuche",
     image: "/jamuche.png",
-    description: "Descripción: Jamuche es una plataforma de comercio electrónico diseñada para ofrecer una experiencia rápida y eficiente de compra y venta de productos. Su objetivo es proporcionar un sistema escalable y fácil de usar, con una interfaz optimizada para navegadores y dispositivos móviles.",
-    link: "https://jamuchee.vercel.app/"
+    description: "Plataforma de comercio electrónico para compra y venta de productos. Sistema escalable con interfaz optimizada para navegadores y móviles.",
+    link: "https://jamuchee.vercel.app/",
+    technologies: ["React", "Node.js", "MongoDB", "Express"]
   },
   {
     title: "Encriptardor",
     image: "/encriptardor.png",
-    description: "Descripción breve del Proyecto 3.",
-    link: "https://encriptador-alura-oracle-one.vercel.app/"
+    description: "Web application for encrypting and decrypting text using cipher algorithms. Features input validation, clipboard copying, and an intuitive interface.",
+    link: "https://encriptador-alura-oracle-one.vercel.app/",
+    technologies: ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    title: "GynTrack",
+    image: "/gyntrack.png",
+    description: "Desktop application for gynecological patient tracking and management. Built with Python Flask and packaged as a standalone executable for easy deployment.",
+    link: "#",
+    technologies: ["Python", "Flask", "PyInstaller", "SQLite", "HTML", "CSS"]
+  },
+  {
+    title: "Rincón Guajiros",
+    image: "/rincon-guajiros.png",
+    description: "Cultural website showcasing Guajiro traditions and heritage. Built with modern web technologies for optimal performance and user experience.",
+    link: "#",
+    technologies: ["Astro", "JavaScript", "CSS", "HTML"]
   }
 ];
 ---
 
 <section id="projects" class="projects-section">
-  <h2 class="section-title">Proyectos</h2>
+  <h2 class="section-title">Projects</h2>
   <div class="projects-grid">
-    {projects.map((project) => (
-      <article class="project-card">
+    {projects.map((project, index) => (
+      <a 
+        href={project.link} 
+        class="project-card" 
+        style={`--delay: ${index * 0.2}s`}
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
         <header class="project-header">
           <h3 class="project-title">{project.title}</h3>
         </header>
@@ -41,22 +65,18 @@ const projects: Project[] = [
           <Image src={project.image} 
           alt={`Vista previa del proyecto ${project.title}`} 
           format="ico" 
-          width={400} height={300}
+          width={350} height={220}
           loading="lazy"  />
-
         </figure>
         <div class="project-content">
-          <p class="project-description ">Descripción: {project.description}</p>
-          <a 
-            href={project.link} 
-            class="project-link" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Ver proyecto
-          </a>
+          <div class="tech-tags">
+            {project.technologies.map(tech => (
+              <span class="tech-tag">{tech}</span>
+            ))}
+          </div>
+          <p class="project-description">{project.description}</p>
         </div>
-      </article>
+      </a>
     ))}
   </div>
 </section>
@@ -77,8 +97,8 @@ const projects: Project[] = [
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
     padding: 0 1rem;
   }
 
@@ -90,6 +110,21 @@ const projects: Project[] = [
     display: flex;
     flex-direction: column;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease-in-out;
+    animation: cardFadeIn 0.6s ease var(--delay) both;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .project-card:hover {
@@ -98,12 +133,12 @@ const projects: Project[] = [
   }
 
   .project-header {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .project-title {
     margin: 0;
-    font-size: 1.75rem;
+    font-size: 1.4rem;
     color: var(--primary);
   }
 
@@ -114,30 +149,34 @@ const projects: Project[] = [
   }
 
   .project-content {
-    padding: 1rem;
+    padding: 0.8rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
   }
 
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .tech-tag {
+    background: var(--secondary);
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
   .project-description {
-    margin: 1rem;
-    line-height: 1.6; 
-    text-align: center;
-    font-size: 1rem;
+    margin: 0;
+    line-height: 1.5; 
+    text-align: left;
+    font-size: 0.9rem;
     color: var(--text);
-  }
-
-  .project-link {
-    margin-top: auto;
-    text-decoration: none;
-    color: var(--secondary);
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-
-  .project-link:hover,
-  .project-link:focus {
-    color: var(--primary);
+    opacity: 0.9;
   }
 </style>

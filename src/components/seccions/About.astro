@@ -1,6 +1,6 @@
 ---
 import SkillCard from '../SkillCard.svelte';
-import { Image } from "astro:assets";
+import TranslatedText from '../TranslatedText.svelte';
 
 // Habilidades organizadas por categoría
 const skillCategories = {
@@ -8,37 +8,108 @@ const skillCategories = {
     { name: 'JavaScript', icon: '🟨', level: 95 },
     { name: 'HTML & CSS', icon: '🖌️', level: 95 },
     { name: 'React', icon: '⚛️', level: 88 },
-    { name: 'Svelte', icon: '💫', level: 85 }
+    { name: 'Svelte', icon: '💫', level: 85 },
+    { name: 'Tailwind CSS', icon: '🎨', level: 85 },
+    { name: 'Astro', icon: '🚀', level: 80 },
+    { name: 'Next.js', icon: '⚡', level: 82 }
   ],
   backend: [
     { name: 'Node.js', icon: '🟩', level: 90 },
     { name: 'Python', icon: '🐍', level: 92 },
-    { name: 'Flask', icon: '🔥', level: 85 }
+    { name: 'Flask', icon: '🔥', level: 85 },
+    { name: 'Prisma', icon: '🗄️', level: 78 },
+    { name: 'Supabase', icon: '☁️', level: 80 },
+    { name: 'APIs REST', icon: '🔗', level: 90 }
+  ],
+  tools: [
+    { name: 'Git/GitHub', icon: '📚', level: 95 },
+    { name: 'Docker', icon: '🐳', level: 75 },
+    { name: 'Vercel', icon: '▲', level: 80 },
+    { name: 'Ollama + Termux', icon: '🤖', level: 70 }
   ]
 };
 
 const bio = `
-Soy un desarrollador full-stack con amplia experiencia en el desarrollo web, tanto en el frontend como en el backend.
-He trabajado con tecnologías modernas como Node.js, Python y frameworks como Flask y React, transformando ideas en soluciones digitales efectivas y escalables.
+I'm a full-stack developer with solid experience across both frontend and backend.
+I work with modern technologies like Node.js, Python, and frameworks such as Flask and React, turning ideas into scalable, effective digital solutions.
 `;
+
 ---
 
 <style>
-  /* Mantén los estilos existentes y añade estos */
+  .about-section {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .profile-section {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .profile-image {
+      width: 200px;
+      height: 200px;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .about-content {
+    margin-bottom: 3rem;
+  }
+
+  .profile-section {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bio-content {
+    flex: 1;
+    text-align: left;
+  }
+
+  .bio-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
   .skills-container {
     display: grid;
     gap: 3rem;
     margin-top: 2rem;
   }
   .profile-image {
-
     object-fit: cover;
     border-radius: 50%;
-    margin: 2rem auto;
     display: block;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border: 4px solid var(--primary);
     transition: transform 0.3s ease;
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
   }
 
   .profile-image:hover {
@@ -71,64 +142,191 @@ He trabajado con tecnologías modernas como Node.js, Python y frameworks como Fl
     border-radius: 2px;
   }
 
-  @media (max-width: 768px) {
-    .skill-category {
-      padding: 1.5rem;
-    }
-    
-    .category-title {
-      font-size: 1.3rem;
-    }
+  .slider {
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+
+  .slider input {
+    display: none;
+  }
+
+  .slider-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .nav-btn {
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background: rgba(var(--primary), 0.1);
+    color: var(--text);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    border: 2px solid transparent;
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary), 0.1);
+  }
+
+  #slide-frontend:checked ~ .slider-nav label[for="slide-frontend"],
+  #slide-backend:checked ~ .slider-nav label[for="slide-backend"],
+  #slide-tools:checked ~ .slider-nav label[for="slide-tools"] {
+    background: var(--primary);
+    color: var(--bg);
+    border-color: rgba(var(--secondary), 0.3);
+  }
+
+  .slides {
+    display: flex;
+    width: 300%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #slide-backend:checked ~ .slides {
+    transform: translateX(-33.333%);
+  }
+
+  #slide-tools:checked ~ .slides {
+    transform: translateX(-66.666%);
+  }
+
+  .slide {
+    width: 33.333%;
+    padding: 1rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 </style>
 
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.slider');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchmove', e => {
+      touchEndX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', () => {
+      const diffX = touchStartX - touchEndX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          // Swipe left, go to next
+          if (document.getElementById('slide-frontend').checked) {
+            document.getElementById('slide-backend').checked = true;
+          } else if (document.getElementById('slide-backend').checked) {
+            document.getElementById('slide-tools').checked = true;
+          }
+        } else {
+          // Swipe right, go to previous
+          if (document.getElementById('slide-tools').checked) {
+            document.getElementById('slide-backend').checked = true;
+          } else if (document.getElementById('slide-backend').checked) {
+            document.getElementById('slide-frontend').checked = true;
+          }
+        }
+      }
+    });
+  });
+</script>
+
 <section id="about" class="about-section">
   <div class="container">
-    <h2 class="section-title">Sobre Mí</h2>
-    
-    <Image 
-      src="/perfil.png" 
-      alt="Foto de perfil" 
-      class="profile-image"
-      loading="lazy"
-      width={300} height={300}
-    />
-    
-    <div class="bio-content">
-      <p class="bio-text">{bio}</p>
-      <div class="experience">
-        <!-- ... mantén los elementos de experiencia ... -->
+    <h2 class="section-title">
+      <TranslatedText key="aboutTitle" fallback="About Me" client:load />
+    </h2>
+    <div class="about-content">
+      <div class="profile-section">
+        <img 
+          src="/perfil.png" 
+          alt="Profile photo of Yeifran Hernandez" 
+          class="profile-image"
+          loading="lazy"
+          width="300" 
+          height="300"
+        />
+        <div class="bio-content">
+          <p class="bio-text">
+            <TranslatedText key="aboutBio" fallback={bio} client:load />
+          </p>
+        </div>
       </div>
     </div>
     
-    <div class="skills-container">
-      <!-- Sección Frontend -->
-      <div class="skill-category">
-        <h3 class="category-title">Frontend</h3>
-        <div class="skills-grid">
-          {skillCategories.frontend.map(skill => (
-            <SkillCard 
-              name={skill.name} 
-              icon={skill.icon} 
-              level={skill.level} 
-              client:load 
-            />
-          ))}
-        </div>
+    <div class="slider">
+      <input type="radio" name="about-slider" id="slide-frontend" checked>
+      <input type="radio" name="about-slider" id="slide-backend">
+      <input type="radio" name="about-slider" id="slide-tools">
+      
+      <div class="slider-nav">
+        <label for="slide-frontend" class="nav-btn">
+          <TranslatedText key="frontend" fallback="Frontend" client:load />
+        </label>
+        <label for="slide-backend" class="nav-btn">
+          <TranslatedText key="backend" fallback="Backend" client:load />
+        </label>
+        <label for="slide-tools" class="nav-btn">
+          <TranslatedText key="tools" fallback="Tools" client:load />
+        </label>
       </div>
-
-      <!-- Sección Backend -->
-      <div class="skill-category">
-        <h3 class="category-title">Backend</h3>
-        <div class="skills-grid">
-          {skillCategories.backend.map(skill => (
-            <SkillCard 
-              name={skill.name} 
-              icon={skill.icon} 
-              level={skill.level} 
-              client:load 
-            />
-          ))}
+      
+      <div class="slides">
+        <!-- Slide Frontend -->
+        <div class="slide">
+          <div class="skills-grid">
+            {skillCategories.frontend.map(skill => (
+              <SkillCard 
+                name={skill.name} 
+                icon={skill.icon} 
+                level={skill.level} 
+                client:load 
+              />
+            ))}
+          </div>
+        </div>
+        
+        <!-- Slide Backend -->
+        <div class="slide">
+          <div class="skills-grid">
+            {skillCategories.backend.map(skill => (
+              <SkillCard 
+                name={skill.name} 
+                icon={skill.icon} 
+                level={skill.level} 
+                client:load 
+              />
+            ))}
+          </div>
+        </div>
+        
+        <!-- Slide Tools -->
+        <div class="slide">
+          <div class="skills-grid">
+            {skillCategories.tools.map(skill => (
+              <SkillCard 
+                name={skill.name} 
+                icon={skill.icon} 
+                level={skill.level} 
+                client:load 
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

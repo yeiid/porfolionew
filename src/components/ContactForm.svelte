@@ -1,10 +1,18 @@
 <script lang="ts">
+    import { language } from '../stores/language';
+    import { t, type Language } from '../utils/translations';
+    
     let name = '';
     let email = '';
     let message = '';
     let isSubmitting = false;
     let submitSuccess = false;
     let submitError = '';
+    let currentLang: Language = 'en';
+    
+    language.subscribe(value => {
+        currentLang = value;
+    });
   
     const handleSubmit = async () => {
       isSubmitting = true;
@@ -18,7 +26,7 @@
         email = '';
         message = '';
       } catch (error) {
-        submitError = 'Error al enviar el mensaje. Inténtalo de nuevo.';
+        submitError = t('contactError', currentLang) || 'Error sending message. Please try again.';
       } finally {
         isSubmitting = false;
       }
@@ -27,7 +35,7 @@
   
   <form on:submit|preventDefault={handleSubmit} class="contact-form">
     <div class="form-group">
-      <label for="name">Nombre</label>
+      <label for="name">{t('contactName', currentLang)}</label>
       <input
         id="name"
         type="text"
@@ -38,7 +46,7 @@
     </div>
     
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">{t('contactEmail', currentLang)}</label>
       <input
         id="email"
         type="email"
@@ -49,7 +57,7 @@
     </div>
     
     <div class="form-group">
-      <label for="message">Mensaje</label>
+      <label for="message">{t('contactMessage', currentLang)}</label>
       <textarea
         id="message"
         bind:value={message}
@@ -60,7 +68,7 @@
     </div>
     
     {#if submitSuccess}
-      <div class="success-message">✅ Mensaje enviado correctamente!</div>
+      <div class="success-message">✅ {t('contactSuccess', currentLang) || 'Message sent successfully!'}</div>
     {:else if submitError}
       <div class="error-message">{submitError}</div>
     {/if}
@@ -70,7 +78,7 @@
       class="submit-button"
       disabled={isSubmitting}
     >
-      {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+      {isSubmitting ? (t('contactSending', currentLang) || 'Sending...') : t('contactSend', currentLang)}
     </button>
   </form>
   

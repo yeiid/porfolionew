@@ -1,17 +1,25 @@
 ---
 import ContactForm from '../ContactForm.svelte';
+import TranslatedText from '../TranslatedText.svelte';
 ---
 
 <section id="contact" class="contact-section">
   <div class="container">
-    <h2 class="section-title">Contacto</h2>
+    <h2 class="section-title">
+      <TranslatedText key="contactTitle" fallback="Contact" client:load />
+    </h2>
+    <p class="section-subtitle">
+      <TranslatedText key="contactSubtitle" fallback="Let's work together on your next project" client:load />
+    </p>
     
     <div class="contact-content">
       <div class="contact-info">
         <div class="info-item">
           <span class="icon">📧</span>
           <div>
-            <h3>Email</h3>
+            <h3>
+              <TranslatedText key="contactEmail" fallback="Email" client:load />
+            </h3>
             <p>yeifran67@gmail.com</p>
           </div>
         </div>
@@ -19,8 +27,20 @@ import ContactForm from '../ContactForm.svelte';
         <div class="info-item">
           <span class="icon">📱</span>
           <div>
-            <h3>Teléfono</h3>
+            <h3>
+              <TranslatedText key="contactPhone" fallback="Phone" client:load />
+            </h3>
             <p>+57 305 807 9573</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <div>
+            <h3>
+              <TranslatedText key="contactLocation" fallback="Location" client:load />
+            </h3>
+            <p>Colombia, La Guajira</p>
           </div>
         </div>
         
@@ -46,10 +66,18 @@ import ContactForm from '../ContactForm.svelte';
   .section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    color: var(--text);
+    opacity: 0.8;
   }
   
   .contact-content {
