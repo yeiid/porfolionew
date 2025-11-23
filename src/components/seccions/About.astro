@@ -1,39 +1,33 @@
 ---
-import SkillCard from '../SkillCard.svelte';
-import TranslatedText from '../TranslatedText.svelte';
+import SkillCard from "../SkillCard.svelte";
+import TranslatedText from "../TranslatedText.svelte";
 
 // Habilidades organizadas por categoría
 const skillCategories = {
   frontend: [
-    { name: 'JavaScript', icon: '🟨', level: 95 },
-    { name: 'HTML & CSS', icon: '🖌️', level: 95 },
-    { name: 'React', icon: '⚛️', level: 88 },
-    { name: 'Svelte', icon: '💫', level: 85 },
-    { name: 'Tailwind CSS', icon: '🎨', level: 85 },
-    { name: 'Astro', icon: '🚀', level: 80 },
-    { name: 'Next.js', icon: '⚡', level: 82 }
+    { name: "JavaScript", icon: "🟨", level: 95 },
+    { name: "HTML & CSS", icon: "🖌️", level: 95 },
+    { name: "React", icon: "⚛️", level: 88 },
+    { name: "Svelte", icon: "💫", level: 85 },
+    { name: "Tailwind CSS", icon: "🎨", level: 85 },
+    { name: "Astro", icon: "🚀", level: 80 },
+    { name: "Next.js", icon: "⚡", level: 82 },
   ],
   backend: [
-    { name: 'Node.js', icon: '🟩', level: 90 },
-    { name: 'Python', icon: '🐍', level: 92 },
-    { name: 'Flask', icon: '🔥', level: 85 },
-    { name: 'Prisma', icon: '🗄️', level: 78 },
-    { name: 'Supabase', icon: '☁️', level: 80 },
-    { name: 'APIs REST', icon: '🔗', level: 90 }
+    { name: "Node.js", icon: "🟩", level: 90 },
+    { name: "Python", icon: "🐍", level: 92 },
+    { name: "Flask", icon: "🔥", level: 85 },
+    { name: "Prisma", icon: "🗄️", level: 78 },
+    { name: "Supabase", icon: "☁️", level: 80 },
+    { name: "APIs REST", icon: "🔗", level: 90 },
   ],
   tools: [
-    { name: 'Git/GitHub', icon: '📚', level: 95 },
-    { name: 'Docker', icon: '🐳', level: 75 },
-    { name: 'Vercel', icon: '▲', level: 80 },
-    { name: 'Ollama + Termux', icon: '🤖', level: 70 }
-  ]
+    { name: "Git/GitHub", icon: "📚", level: 95 },
+    { name: "Docker", icon: "🐳", level: 75 },
+    { name: "Vercel", icon: "▲", level: 80 },
+    { name: "Ollama + Termux", icon: "🤖", level: 70 },
+  ],
 };
-
-const bio = `
-I'm a full-stack developer with solid experience across both frontend and backend.
-I work with modern technologies like Node.js, Python, and frameworks such as Flask and React, turning ideas into scalable, effective digital solutions.
-`;
-
 ---
 
 <style>
@@ -131,7 +125,7 @@ I work with modern technologies like Node.js, Python, and frameworks such as Fla
   }
 
   .category-title::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -154,8 +148,9 @@ I work with modern technologies like Node.js, Python, and frameworks such as Fla
 
   .slider-nav {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     justify-content: center;
-    gap: 1rem;
     margin-bottom: 2rem;
   }
 
@@ -210,35 +205,35 @@ I work with modern technologies like Node.js, Python, and frameworks such as Fla
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.slider');
+  document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.querySelector(".slider");
     let touchStartX = 0;
     let touchEndX = 0;
 
-    slider.addEventListener('touchstart', e => {
+    slider.addEventListener("touchstart", (e) => {
       touchStartX = e.touches[0].clientX;
     });
 
-    slider.addEventListener('touchmove', e => {
+    slider.addEventListener("touchmove", (e) => {
       touchEndX = e.touches[0].clientX;
     });
 
-    slider.addEventListener('touchend', () => {
+    slider.addEventListener("touchend", () => {
       const diffX = touchStartX - touchEndX;
       if (Math.abs(diffX) > 50) {
         if (diffX > 0) {
           // Swipe left, go to next
-          if (document.getElementById('slide-frontend').checked) {
-            document.getElementById('slide-backend').checked = true;
-          } else if (document.getElementById('slide-backend').checked) {
-            document.getElementById('slide-tools').checked = true;
+          if (document.getElementById("slide-frontend").checked) {
+            document.getElementById("slide-backend").checked = true;
+          } else if (document.getElementById("slide-backend").checked) {
+            document.getElementById("slide-tools").checked = true;
           }
         } else {
           // Swipe right, go to previous
-          if (document.getElementById('slide-tools').checked) {
-            document.getElementById('slide-backend').checked = true;
-          } else if (document.getElementById('slide-backend').checked) {
-            document.getElementById('slide-frontend').checked = true;
+          if (document.getElementById("slide-tools").checked) {
+            document.getElementById("slide-backend").checked = true;
+          } else if (document.getElementById("slide-backend").checked) {
+            document.getElementById("slide-frontend").checked = true;
           }
         }
       }
@@ -251,29 +246,19 @@ I work with modern technologies like Node.js, Python, and frameworks such as Fla
     <h2 class="section-title">
       <TranslatedText key="aboutTitle" fallback="About Me" client:load />
     </h2>
-    <div class="about-content">
-      <div class="profile-section">
-        <img 
-          src="/perfil.png" 
-          alt="Profile photo of Yeifran Hernandez" 
-          class="profile-image"
-          loading="lazy"
-          width="300" 
-          height="300"
-        />
-        <div class="bio-content">
-          <p class="bio-text">
-            <TranslatedText key="aboutBio" fallback={bio} client:load />
-          </p>
-        </div>
+    <div class="profile-section">
+      <div class="profile-text">
+        <p class="bio">
+          <TranslatedText key="aboutBio" client:load />
+        </p>
       </div>
     </div>
-    
+
     <div class="slider">
-      <input type="radio" name="about-slider" id="slide-frontend" checked>
-      <input type="radio" name="about-slider" id="slide-backend">
-      <input type="radio" name="about-slider" id="slide-tools">
-      
+      <input type="radio" name="about-slider" id="slide-frontend" checked />
+      <input type="radio" name="about-slider" id="slide-backend" />
+      <input type="radio" name="about-slider" id="slide-tools" />
+
       <div class="slider-nav">
         <label for="slide-frontend" class="nav-btn">
           <TranslatedText key="frontend" fallback="Frontend" client:load />
@@ -285,47 +270,67 @@ I work with modern technologies like Node.js, Python, and frameworks such as Fla
           <TranslatedText key="tools" fallback="Tools" client:load />
         </label>
       </div>
-      
+
       <div class="slides">
         <!-- Slide Frontend -->
         <div class="slide">
-          <div class="skills-grid">
-            {skillCategories.frontend.map(skill => (
-              <SkillCard 
-                name={skill.name} 
-                icon={skill.icon} 
-                level={skill.level} 
-                client:load 
-              />
-            ))}
+          <div class="skill-category">
+            <h4>
+              <TranslatedText key="frontend" fallback="Frontend" client:load />
+            </h4>
+            <div class="skills-section">
+              <h3 class="skills-title">
+                <TranslatedText
+                  key="skillsTitle"
+                  fallback="Skills & Expertise"
+                  client:load
+                />
+              </h3>
+              <div class="skills-grid">
+                {
+                  skillCategories.frontend.map((skill) => (
+                    <SkillCard
+                      name={skill.name}
+                      icon={skill.icon}
+                      level={skill.level}
+                      client:load
+                    />
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
-        
+
         <!-- Slide Backend -->
         <div class="slide">
           <div class="skills-grid">
-            {skillCategories.backend.map(skill => (
-              <SkillCard 
-                name={skill.name} 
-                icon={skill.icon} 
-                level={skill.level} 
-                client:load 
-              />
-            ))}
+            {
+              skillCategories.backend.map((skill) => (
+                <SkillCard
+                  name={skill.name}
+                  icon={skill.icon}
+                  level={skill.level}
+                  client:load
+                />
+              ))
+            }
           </div>
         </div>
-        
+
         <!-- Slide Tools -->
         <div class="slide">
           <div class="skills-grid">
-            {skillCategories.tools.map(skill => (
-              <SkillCard 
-                name={skill.name} 
-                icon={skill.icon} 
-                level={skill.level} 
-                client:load 
-              />
-            ))}
+            {
+              skillCategories.tools.map((skill) => (
+                <SkillCard
+                  name={skill.name}
+                  icon={skill.icon}
+                  level={skill.level}
+                  client:load
+                />
+              ))
+            }
           </div>
         </div>
       </div>

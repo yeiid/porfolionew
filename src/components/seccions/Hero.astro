@@ -1,108 +1,417 @@
 ---
-import TranslatedText from '../TranslatedText.svelte';
+import TranslatedText from "../TranslatedText.svelte";
 ---
 
 <section id="hero" class="hero">
-  <div class="container">
-    <h1 class="hero-title">
-      <span class="typing-text">
-        <TranslatedText key="heroTitle" fallback="Frontend Developer" client:load />
-      </span>
-    </h1>
-    <p class="hero-subtitle">
-      <TranslatedText key="heroSubtitle" fallback="Hi, I'm Yeifran Hernandez" client:load />
-    </p>
+  <div class="background-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
   </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="text-wrapper">
+        <h2 class="greeting">
+          <TranslatedText
+            key="heroGreeting"
+            fallback="Hello, I'm"
+            client:load
+          />
+        </h2>
+        <h1 class="name">Yeifran Hernandez</h1>
+        <div class="role-container">
+          <span class="role-prefix">&gt; </span>
+          <span class="role">
+            <TranslatedText
+              key="heroTitle"
+              fallback="Full Stack Developer"
+              client:load
+            />
+          </span>
+          <span class="cursor">_</span>
+        </div>
+      </div>
+
+      <p class="hero-subtitle">
+        <TranslatedText
+          key="heroSubtitle"
+          fallback="I build accessible, pixel-perfect, performant, and awesome web experiences."
+          client:load
+        />
+      </p>
+
+      <div class="cta-group">
+        <a href="#projects" class="btn-primary">
+          <TranslatedText key="viewProjects" fallback="View Work" client:load />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon"
+            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
+              points="12 5 19 12 12 19"></polyline></svg
+          >
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <TranslatedText key="contactMe" fallback="Contact Me" client:load />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+    <span class="mouse">
+      <span class="wheel"></span>
+    </span>
+    <span class="arrow"></span>
+    <span class="text">
+      <TranslatedText key="scrollDown" fallback="Scroll down" client:load />
+    </span>
+  </a>
 </section>
 
 <style>
-
   .hero {
     position: relative;
-    padding: 8rem 1rem;
-    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
     overflow: hidden;
     background: var(--bg);
     color: var(--text);
   }
-  
-  /* Fondo animado basado en las variables del tema */
-  .hero::before {
+
+  /* Animated Background */
+  .background-blobs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float 20s infinite alternate;
+  }
+
+  .blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--primary);
+    animation-delay: 0s;
+  }
+
+  .blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: var(--secondary, #64ffda); /* Fallback or secondary color */
+    animation-delay: -10s;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(20px, 40px) scale(1.1);
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 800px;
+  }
+
+  /* Typography */
+  .greeting {
+    font-size: 1.25rem;
+    font-family: "Fira Code", monospace;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.2s;
+  }
+
+  .name {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-heading);
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.3s;
+    background: linear-gradient(
+      to right,
+      var(--text) 30%,
+      var(--text-muted, #8892b0)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .role-container {
+    display: flex;
+    align-items: center;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--text-muted, #8892b0);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.4s;
+  }
+
+  .role-prefix {
+    margin-right: 0.5rem;
+    color: var(--primary);
+  }
+
+  .cursor {
+    display: inline-block;
+    margin-left: 0.2rem;
+    animation: blink 1s step-end infinite;
+    color: var(--primary);
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text-muted, #8892b0);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.5s;
+  }
+
+  /* Buttons */
+  .cta-group {
+    display: flex;
+    gap: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards 0.6s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    border-radius: 4px;
+    font-family: "Fira Code", monospace;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 300%;
+    left: 0;
+    width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-    opacity: 0.4;
-    animation: slide 15s linear infinite;
+    background: var(--primary);
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: -1;
   }
-  
-  @keyframes slide {
-    0% { transform: translateX(0%); filter: hue-rotate(0deg); }
-    100% { transform: translateX(33.33%); filter: hue-rotate(360deg); }
+
+  .btn-primary:hover {
+    color: var(--bg);
   }
-  
-  /* Contenedor para centrar y limitar el contenido */
-  .container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 2rem;
+
+  .btn-primary:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn-primary .icon {
+    transition: transform 0.25s ease;
+  }
+
+  .btn-primary:hover .icon {
+    transform: translateX(4px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 0;
+    color: var(--text);
+    font-family: "Fira Code", monospace;
+    font-size: 0.9rem;
+    text-decoration: none;
     position: relative;
-    z-index: 1;
   }
-  
-  /* Título principal con animación de escritura */
-  .hero-title {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    overflow: hidden;
-    white-space: nowrap;
+
+  .btn-secondary::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0.5rem;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
   }
-  
-  .hero-title:hover {
-    transform: scale(1.05);
+
+  .btn-secondary:hover {
+    color: var(--primary);
   }
-  
-  .typing-text {
-    border-right: 2px solid var(--primary);
-    animation: typing 4s steps(18) 0s both, blink 0.75s infinite;
+
+  .btn-secondary:hover::after {
+    width: 100%;
   }
-  
-  @keyframes typing {
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 1.5s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .scroll-indicator .text {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid var(--text-muted, #8892b0);
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .wheel {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: scroll 2s infinite;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
     from {
-      width: 0;
+      opacity: 0;
+      transform: translateY(20px);
     }
     to {
-      width: 100%;
+      opacity: 1;
+      transform: translateY(0);
     }
   }
-  
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
     50% {
-      border-color: transparent;
+      opacity: 0;
     }
   }
-  
-  /* Subtítulo */
-  .hero-subtitle {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    color: var(--text);
+
+  @keyframes scroll {
+    0% {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, 15px);
+      opacity: 0;
+    }
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
-    .hero-title {
+    .hero {
+      padding: 1.5rem;
+      align-items: center; /* Center vertically on mobile too */
+    }
+
+    .name {
       font-size: 3rem;
     }
-    .hero-subtitle {
-      font-size: 1.2rem;
+
+    .role-container {
+      font-size: 1.5rem;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      justify-content: center;
     }
   }
 </style>

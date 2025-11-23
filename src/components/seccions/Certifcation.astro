@@ -313,10 +313,15 @@ const educations = certifications.filter(cert => cert.type === 'education');
     slider.addEventListener('touchend', () => {
       const diffX = touchStartX - touchEndX;
       if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          document.getElementById('slide-experience').checked = true;
-        } else {
-          document.getElementById('slide-education').checked = true;
+        const isExperience = document.getElementById('slide-experience').checked;
+        if (diffX > 0) { // Swipe left
+          if (isExperience) {
+            document.getElementById('slide-education').checked = true;
+          }
+        } else { // Swipe right
+          if (!isExperience) {
+            document.getElementById('slide-experience').checked = true;
+          }
         }
       }
     });
