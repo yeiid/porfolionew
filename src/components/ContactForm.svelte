@@ -162,13 +162,13 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      background: rgba(var(--bg), 0.6);
+      background: rgba(var(--ink-rgb), 0.6);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       padding: 2.5rem;
       border-radius: 24px;
       box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(var(--text), 0.05);
+      border: 1px solid rgba(var(--text-rgb), 0.05);
       position: relative;
       overflow: hidden;
     }
@@ -198,9 +198,9 @@
     .form-input {
       width: 100%;
       padding: 1rem 1.25rem;
-      border: 1px solid rgba(var(--text), 0.1);
+      border: 1px solid rgba(var(--text-rgb), 0.1);
       border-radius: 12px;
-      background: rgba(var(--bg), 0.5);
+      background: rgba(var(--ink-rgb), 0.5);
       color: var(--text);
       transition: all 0.3s ease;
       font-family: inherit;
@@ -215,8 +215,8 @@
     
     .form-input:focus {
       border-color: var(--primary);
-      background: rgba(var(--bg), 0.8);
-      box-shadow: 0 0 0 4px rgba(var(--primary), 0.1);
+      background: rgba(var(--ink-rgb), 0.8);
+      box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
     }
 
     /* Floating Label */
@@ -278,7 +278,7 @@
     
     .submit-button:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(var(--primary), 0.4);
+      box-shadow: 0 10px 25px -5px rgba(var(--primary-rgb), 0.4);
     }
 
     .submit-button:hover:not(:disabled)::before {

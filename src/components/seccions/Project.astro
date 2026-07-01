@@ -1,63 +1,76 @@
 ---
 import { Image } from "astro:assets";
+import TranslatedText from "../TranslatedText.svelte";
+
 interface Project {
   title: string;
   image: string;
-  description: string;
+  descKey: string;
   link: string;
+  github?: string;
   technologies: string[];
+  altKey: string;
+  isFounder?: boolean;
+  badgeKey?: string;
 }
 
 const projects: Project[] = [
   {
+    title: "NeuralJIRA",
+    image: "/ecoraices-web.png",
+    descKey: "projectNeuraljiraDesc",
+    link: "https://neuraljira.tech",
+    github: undefined,
+    technologies: ["Astro", "Markdown", "Vercel"],
+    altKey: "projectAlt",
+    isFounder: true,
+    badgeKey: "founderProject"
+  },
+  {
     title: "EcoRaíces",
     image: "/ecoraices-web.png",
-    description: "Web application for registering geolocated trees. Features user authentication, personalized profiles, data modification, and photo uploads with interactive maps for tree geolocation.",
+    descKey: "projectEcoraicesDesc",
     link: "https://ecoraices-proyect.vercel.app/",
-    technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "NextAuth", "Prisma", "SQLite", "Zustand", "Vercel"]
-  },
-  {
-    title: "Jamuche",
-    image: "/jamuche.png",
-    description: "Plataforma de comercio electrónico para compra y venta de productos. Sistema escalable con interfaz optimizada para navegadores y móviles.",
-    link: "https://jamuchee.vercel.app/",
-    technologies: ["React", "Node.js", "MongoDB", "Express"]
-  },
-  {
-    title: "Encriptardor",
-    image: "/encriptardor.png",
-    description: "Web application for encrypting and decrypting text using cipher algorithms. Features input validation, clipboard copying, and an intuitive interface.",
-    link: "https://encriptador-alura-oracle-one.vercel.app/",
-    technologies: ["JavaScript", "HTML", "CSS"]
+    technologies: ["Next.js", "React", "Prisma", "SQLite", "NextAuth"],
+    altKey: "projectAlt"
   },
   {
     title: "GynTrack",
     image: "/gyntrack.png",
-    description: "Desktop application for gynecological patient tracking and management. Built with Python Flask and packaged as a standalone executable for easy deployment.",
+    descKey: "projectGyntrackDesc",
     link: "https://demo-html-five.vercel.app/",
-    technologies: ["Python", "Flask", "PyInstaller", "SQLite", "HTML", "CSS"]
+    technologies: ["Python", "Flask", "PyInstaller", "SQLite"],
+    altKey: "projectAlt"
   },
   {
-    title: "Rincón Guajiros",
-    image: "/rinconguajiro.png",
-    description: "Cultural website showcasing Guajiro traditions and heritage. Built with modern web technologies for optimal performance and user experience.",
-    link: "https://turismoguajiro.vercel.app/",
-    technologies: ["Astro", "JavaScript", "CSS", "HTML"]
+    title: "Jamuche",
+    image: "/jamuche.png",
+    descKey: "projectJamucheDesc",
+    link: "https://jamuchee.vercel.app/",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    altKey: "projectAlt"
   }
 ];
 ---
 
 <section id="projects" class="projects-section">
-  <h2 class="section-title">Projects</h2>
+  <h2 class="section-title">
+    <TranslatedText key="projectsTitle" fallback="Projects" client:load />
+  </h2>
   <div class="projects-grid">
     {projects.map((project, index) => (
       <a 
         href={project.link} 
-        class="project-card" 
+        class={`project-card ${project.isFounder ? 'founder-card' : ''}`}
         style={`--delay: ${index * 0.2}s`}
         target="_blank" 
         rel="noopener noreferrer"
       >
+        {project.isFounder && (
+          <div class="founder-badge">
+            <TranslatedText key={project.badgeKey} fallback="Founder Project" client:load />
+          </div>
+        )}
         <header class="project-header">
           <h3 class="project-title">{project.title}</h3>
         </header>
@@ -74,7 +87,9 @@ const projects: Project[] = [
               <span class="tech-tag">{tech}</span>
             ))}
           </div>
-          <p class="project-description">{project.description}</p>
+          <p class="project-description">
+            <TranslatedText key={project.descKey} fallback={project.title} client:load />
+          </p>
         </div>
       </a>
     ))}
@@ -114,6 +129,27 @@ const projects: Project[] = [
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+    position: relative;
+  }
+
+  .project-card.founder-card {
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    background: linear-gradient(135deg, var(--panel) 0%, rgba(var(--accent-rgb), 0.05) 100%);
+  }
+
+  .founder-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 3;
   }
 
   @keyframes cardFadeIn {
@@ -130,6 +166,10 @@ const projects: Project[] = [
   .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
+  }
+
+  .project-card.founder-card:hover {
+    box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.3);
   }
 
   .project-header {

@@ -45,7 +45,7 @@
   
     .progress-bar {
       height: 8px;
-      background: rgba(var(--primary), 0.1);
+      background: rgba(var(--primary-rgb), 0.1);
       border-radius: 4px;
       position: relative;
     }

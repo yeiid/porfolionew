@@ -110,10 +110,10 @@ const skillCategories = {
     transform: scale(1.05) rotate(3deg);
   }
   .skill-category {
-    background: rgba(var(--primary), 0.03);
+    background: rgba(var(--primary-rgb), 0.03);
     padding: 2rem;
     border-radius: 16px;
-    border: 1px solid rgba(var(--primary), 0.1);
+    border: 1px solid rgba(var(--primary-rgb), 0.1);
   }
 
   .category-title {
@@ -158,7 +158,7 @@ const skillCategories = {
     cursor: pointer;
     padding: 1rem 2rem;
     border-radius: 8px;
-    background: rgba(var(--primary), 0.1);
+    background: rgba(var(--primary-rgb), 0.1);
     color: var(--text);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
@@ -167,7 +167,7 @@ const skillCategories = {
 
   .nav-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary), 0.1);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
   }
 
   #slide-frontend:checked ~ .slider-nav label[for="slide-frontend"],
@@ -175,7 +175,7 @@ const skillCategories = {
   #slide-tools:checked ~ .slider-nav label[for="slide-tools"] {
     background: var(--primary);
     color: var(--bg);
-    border-color: rgba(var(--secondary), 0.3);
+    border-color: rgba(var(--secondary-rgb), 0.3);
   }
 
   .slides {

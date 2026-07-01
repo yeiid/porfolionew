@@ -10,57 +10,68 @@ import TranslatedText from "../TranslatedText.svelte";
 
   <div class="container">
     <div class="hero-content">
-      <div class="text-wrapper">
-        <h2 class="greeting">
-          <TranslatedText
-            key="heroGreeting"
-            fallback="Hello, I'm"
-            client:load
-          />
-        </h2>
-        <h1 class="name">Yeifran Hernandez</h1>
-        <div class="role-container">
-          <span class="role-prefix">&gt; </span>
-          <span class="role">
+      <div class="hero-left">
+        <div class="text-wrapper">
+          <h2 class="greeting">
             <TranslatedText
-              key="heroTitle"
-              fallback="Full Stack Developer"
+              key="heroGreeting"
+              fallback="Hello, I'm"
               client:load
             />
-          </span>
-          <span class="cursor">_</span>
+          </h2>
+          <h1 class="name">Yeifran Hernandez</h1>
+          <div class="role-container">
+            <span class="role-prefix">&gt; </span>
+            <span class="role">
+              <TranslatedText
+                key="heroTitle"
+                fallback="Full Stack Developer"
+                client:load
+              />
+            </span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+
+        <div class="cta-group">
+          <a href="#projects" class="btn-primary">
+            <TranslatedText key="viewProjects" fallback="View Work" client:load />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon"
+              ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
+                points="12 5 19 12 12 19"></polyline></svg
+            >
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <TranslatedText key="contactMe" fallback="Contact Me" client:load />
+          </a>
         </div>
       </div>
 
-      <p class="hero-subtitle">
-        <TranslatedText
-          key="heroSubtitle"
-          fallback="I build accessible, pixel-perfect, performant, and awesome web experiences."
-          client:load
-        />
-      </p>
-
-      <div class="cta-group">
-        <a href="#projects" class="btn-primary">
-          <TranslatedText key="viewProjects" fallback="View Work" client:load />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon"
-            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
-              points="12 5 19 12 12 19"></polyline></svg
-          >
-        </a>
-        <a href="#contact" class="btn-secondary">
-          <TranslatedText key="contactMe" fallback="Contact Me" client:load />
-        </a>
+      <div class="hero-right">
+        <div class="profile-image-wrapper">
+          <img
+            src="/perfil.png"
+            alt="Yeifran Hernandez - Full Stack Developer"
+            class="profile-image"
+            width="320"
+            height="320"
+            loading="eager"
+          />
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <TranslatedText key="availableForWork" fallback="Available for work" client:load />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -123,7 +134,7 @@ import TranslatedText from "../TranslatedText.svelte";
     right: -10%;
     width: 60vw;
     height: 60vw;
-    background: var(--secondary, #64ffda); /* Fallback or secondary color */
+    background: var(--secondary, #64ffda);
     animation-delay: -10s;
   }
 
@@ -146,9 +157,103 @@ import TranslatedText from "../TranslatedText.svelte";
 
   .hero-content {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 800px;
+    align-items: center;
+    gap: 4rem;
+    width: 100%;
+  }
+
+  .hero-left {
+    flex: 1;
+  }
+
+  .hero-right {
+    flex-shrink: 0;
+  }
+
+  /* Profile Image */
+  .profile-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .profile-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 4px solid var(--accent);
+    box-shadow:
+      0 0 0 4px rgba(var(--accent-rgb), 0.15),
+      0 0 30px rgba(var(--accent-rgb), 0.25),
+      0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: imageReveal 0.8s ease forwards 0.3s;
+  }
+
+  @keyframes imageReveal {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .profile-image:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow:
+      0 0 0 4px rgba(var(--accent-rgb), 0.25),
+      0 0 50px rgba(var(--accent-rgb), 0.4),
+      0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  .status-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(var(--ink-rgb), 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(var(--green-rgb), 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green);
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: badgeSlideIn 0.5s ease forwards 1s;
+  }
+
+  @keyframes badgeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
   }
 
   /* Typography */
@@ -197,16 +302,6 @@ import TranslatedText from "../TranslatedText.svelte";
     margin-left: 0.2rem;
     animation: blink 1s step-end infinite;
     color: var(--accent);
-  }
-
-  .hero-subtitle {
-    font-size: 1.125rem;
-    line-height: 1.65;
-    color: var(--muted);
-    max-width: 540px;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 0.5s;
   }
 
   /* Buttons */
@@ -312,6 +407,33 @@ import TranslatedText from "../TranslatedText.svelte";
   }
 
   /* Responsive */
+  @media (max-width: 968px) {
+    .hero-content {
+      flex-direction: column-reverse;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .role-container {
+      justify-content: center;
+    }
+
+    .cta-group {
+      justify-content: center;
+    }
+
+    .profile-image {
+      width: 220px;
+      height: 220px;
+    }
+  }
+
   @media (max-width: 768px) {
     .hero { padding: 1.5rem; align-items: center; }
     .name { font-size: 3rem; }
@@ -319,5 +441,12 @@ import TranslatedText from "../TranslatedText.svelte";
     .cta-group { flex-direction: column; width: 100%; gap: 1rem; }
     .btn-primary  { width: 100%; justify-content: center; }
     .btn-secondary { justify-content: center; }
+    .profile-image { width: 180px; height: 180px; }
+    .status-badge { font-size: 0.65rem; padding: 0.4rem 0.75rem; bottom: 10px; right: 10px; }
+  }
+
+  @media (max-width: 480px) {
+    .profile-image { width: 150px; height: 150px; }
+    .name { font-size: 2.5rem; }
   }
 </style>

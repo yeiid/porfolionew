@@ -3,7 +3,7 @@
     import { language } from "../stores/language";
     import { t, type Language } from "../utils/translations";
 
-    let theme: "light" | "dark" = "light";
+    let theme: "light" | "dark" = "dark";
     let currentLang: Language = "en";
 
     // Subscribe to language changes
@@ -14,7 +14,7 @@
     onMount(() => {
         // Initialize theme
         const savedTheme =
-            (localStorage.getItem("theme") as "light" | "dark") || "light";
+            (localStorage.getItem("theme") as "light" | "dark") || "dark";
         theme = savedTheme;
         document.documentElement.setAttribute("data-theme", theme);
 
@@ -75,7 +75,7 @@
 
     .toggle-btn {
         background: transparent;
-        border: 1px solid rgba(var(--text), 0.2);
+        border: 1px solid rgba(var(--text-rgb), 0.2);
         color: var(--text);
         cursor: pointer;
         padding: 0.5rem;
@@ -89,7 +89,7 @@
     }
 
     .toggle-btn:hover {
-        background: rgba(var(--primary), 0.1);
+        background: rgba(var(--primary-rgb), 0.1);
         border-color: var(--primary);
         color: var(--primary);
         transform: translateY(-2px);

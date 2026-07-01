@@ -75,7 +75,7 @@
 
     .back-to-top:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(var(--primary), 0.4);
+        box-shadow: 0 10px 25px rgba(var(--primary-rgb), 0.4);
         background: var(--secondary);
     }
 

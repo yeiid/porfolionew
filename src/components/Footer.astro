@@ -61,10 +61,10 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .footer {
-    background: rgba(var(--bg), 0.8);
+    background: rgba(var(--ink-rgb), 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(var(--text), 0.05);
+    border-top: 1px solid rgba(var(--text-rgb), 0.05);
     padding: 4rem 0 2rem;
     margin-top: auto;
     position: relative;
@@ -135,13 +135,13 @@ const currentYear = new Date().getFullYear();
   }
 
   .tech-item {
-    background: rgba(var(--primary), 0.1);
+    background: rgba(var(--primary-rgb), 0.1);
     color: var(--primary);
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
-    border: 1px solid rgba(var(--primary), 0.2);
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
     transition: all 0.3s ease;
   }
 
@@ -152,7 +152,7 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(var(--text), 0.1);
+    border-top: 1px solid rgba(var(--text-rgb), 0.1);
     padding-top: 2rem;
     display: flex;
     justify-content: space-between;

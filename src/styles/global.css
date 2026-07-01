@@ -21,6 +21,21 @@
   --green:     #34D399;
   --red:       #F87171;
 
+  /* ── RGB variants for rgba() usage ── */
+  --ink-rgb:       11, 15, 26;
+  --deep-rgb:      17, 24, 39;
+  --panel-rgb:     26, 34, 53;
+  --border-rgb:    37, 46, 66;
+  --muted-rgb:     74, 85, 104;
+  --text-rgb:      203, 213, 225;
+  --light-rgb:     226, 232, 240;
+  --white-rgb:     248, 250, 252;
+  --accent-rgb:    249, 115, 22;
+  --accent2-rgb:   251, 146, 60;
+  --electric-rgb:  56, 189, 248;
+  --green-rgb:     52, 211, 153;
+  --red-rgb:       248, 113, 113;
+
   /* ── Tipografías ── */
   --font-display: 'Space Grotesk', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
@@ -28,11 +43,36 @@
   /* ── Aliases para componentes existentes ── */
   --bg:            var(--ink);
   --primary:       var(--accent);
+  --primary-rgb:   var(--accent-rgb);
   --secondary:     var(--electric);
+  --secondary-rgb: var(--electric-rgb);
   --max-width:     1200px;
   --header-height: 80px;
   --text-heading:  var(--white);
   --text-muted:    var(--muted);
+}
+
+/* ── Light Theme ── */
+[data-theme="light"] {
+  --ink:       #F8FAFC;
+  --deep:      #F1F5F9;
+  --panel:     #FFFFFF;
+  --border:    #E2E8F0;
+  --muted:     #64748B;
+  --text:      #334155;
+  --light:     #1E293B;
+  --white:     #0F172A;
+
+  --ink-rgb:       248, 250, 252;
+  --deep-rgb:      241, 245, 249;
+  --panel-rgb:     255, 255, 255;
+  --border-rgb:    226, 232, 240;
+  --muted-rgb:     100, 116, 139;
+  --text-rgb:      51, 65, 85;
+  --light-rgb:     30, 41, 59;
+  --white-rgb:     15, 23, 42;
+
+  --bg:            var(--ink);
 }
 
 /* ── Reset ── */
@@ -42,11 +82,12 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-display);
-  background: var(--ink);
+  background: var(--bg);
   color: var(--text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ── Tipografía ── */
