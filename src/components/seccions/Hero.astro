@@ -154,8 +154,8 @@ import TranslatedText from "../TranslatedText.svelte";
   /* Typography */
   .greeting {
     font-size: 1.25rem;
-    font-family: "Fira Code", monospace;
-    color: var(--primary);
+    font-family: var(--font-mono);
+    color: var(--accent);
     margin-bottom: 1rem;
     opacity: 0;
     animation: fadeUp 0.5s ease forwards 0.2s;
@@ -166,15 +166,11 @@ import TranslatedText from "../TranslatedText.svelte";
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1rem;
-    color: var(--text-heading);
-    letter-spacing: -0.02em;
+    color: var(--white);
+    letter-spacing: -0.03em;
     opacity: 0;
     animation: fadeUp 0.5s ease forwards 0.3s;
-    background: linear-gradient(
-      to right,
-      var(--text) 30%,
-      var(--text-muted, #8892b0)
-    );
+    background: linear-gradient(135deg, var(--white) 30%, var(--muted));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -185,7 +181,7 @@ import TranslatedText from "../TranslatedText.svelte";
     align-items: center;
     font-size: clamp(1.5rem, 5vw, 3rem);
     font-weight: 600;
-    color: var(--text-muted, #8892b0);
+    color: var(--muted);
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.5s ease forwards 0.4s;
@@ -193,20 +189,20 @@ import TranslatedText from "../TranslatedText.svelte";
 
   .role-prefix {
     margin-right: 0.5rem;
-    color: var(--primary);
+    color: var(--accent);
   }
 
   .cursor {
     display: inline-block;
     margin-left: 0.2rem;
     animation: blink 1s step-end infinite;
-    color: var(--primary);
+    color: var(--accent);
   }
 
   .hero-subtitle {
     font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--text-muted, #8892b0);
+    line-height: 1.65;
+    color: var(--muted);
     max-width: 540px;
     margin-bottom: 2.5rem;
     opacity: 0;
@@ -225,77 +221,35 @@ import TranslatedText from "../TranslatedText.svelte";
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    padding: .85rem 2rem;
+    background: var(--accent);
+    border: none;
+    color: var(--ink);
     border-radius: 4px;
-    font-family: "Fira Code", monospace;
+    font-family: var(--font-display);
+    font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-    position: relative;
-    overflow: hidden;
+    transition: background .2s, transform .15s;
   }
-
-  .btn-primary::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--primary);
-    transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-    z-index: -1;
-  }
-
-  .btn-primary:hover {
-    color: var(--bg);
-  }
-
-  .btn-primary:hover::before {
-    transform: translateX(0);
-  }
-
-  .btn-primary .icon {
-    transition: transform 0.25s ease;
-  }
-
-  .btn-primary:hover .icon {
-    transform: translateX(4px);
-  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-primary .icon { transition: transform 0.25s ease; }
+  .btn-primary:hover .icon { transform: translateX(4px); }
 
   .btn-secondary {
     display: inline-flex;
     align-items: center;
-    padding: 1rem 0;
-    color: var(--text);
-    font-family: "Fira Code", monospace;
+    padding: .85rem 2rem;
+    background: transparent;
+    color: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-display);
     font-size: 0.9rem;
     text-decoration: none;
-    position: relative;
+    transition: border-color .2s, color .2s;
   }
-
-  .btn-secondary::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: 0.5rem;
-    left: 0;
-    background-color: var(--primary);
-    transition: width 0.3s ease;
-  }
-
-  .btn-secondary:hover {
-    color: var(--primary);
-  }
-
-  .btn-secondary:hover::after {
-    width: 100%;
-  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
   /* Scroll Indicator */
   .scroll-indicator {
@@ -314,104 +268,56 @@ import TranslatedText from "../TranslatedText.svelte";
   }
 
   .scroll-indicator .text {
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-top: 0.5rem;
     font-weight: 500;
-    opacity: 0.7;
+    opacity: 0.6;
+    color: var(--muted);
   }
 
   .mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid var(--text-muted, #8892b0);
+    width: 26px; height: 40px;
+    border: 2px solid var(--muted);
     border-radius: 20px;
     position: relative;
   }
 
   .wheel {
-    position: absolute;
-    top: 6px;
-    left: 50%;
+    position: absolute; top: 6px; left: 50%;
     transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: var(--primary);
-    border-radius: 50%;
+    width: 4px; height: 4px;
+    background: var(--accent); border-radius: 50%;
     animation: scroll 2s infinite;
   }
 
   /* Animations */
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
-
   @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
-
   @keyframes scroll {
-    0% {
-      transform: translate(-50%, 0);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(-50%, 15px);
-      opacity: 0;
-    }
+    0%   { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .hero {
-      padding: 1.5rem;
-      align-items: center; /* Center vertically on mobile too */
-    }
-
-    .name {
-      font-size: 3rem;
-    }
-
-    .role-container {
-      font-size: 1.5rem;
-    }
-
-    .cta-group {
-      flex-direction: column;
-      width: 100%;
-      gap: 1rem;
-    }
-
-    .btn-primary {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .btn-secondary {
-      justify-content: center;
-    }
+    .hero { padding: 1.5rem; align-items: center; }
+    .name { font-size: 3rem; }
+    .role-container { font-size: 1.5rem; }
+    .cta-group { flex-direction: column; width: 100%; gap: 1rem; }
+    .btn-primary  { width: 100%; justify-content: center; }
+    .btn-secondary { justify-content: center; }
   }
 </style>

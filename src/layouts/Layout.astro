@@ -27,12 +27,13 @@ const { title } = Astro.props;
     <meta name="robots" content="index, follow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <title>Yeifran Hernandez - Desarrollador Frontend</title>
-    <link rel="stylesheet" href="/src/styles/global.css" />
+    <title>{title}</title>
   </head>
   <body id="top">
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
@@ -48,46 +49,7 @@ const { title } = Astro.props;
 
 <style>
   .main-content {
-    padding-top: var(
-      --header-height
-    ); /* Previene solapamiento con header fijo */
+    padding-top: var(--header-height);
     min-height: calc(100vh - var(--header-height));
-  }
-  /* Mejoras en la transición de temas */
-  * {
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
-  }
-  /* Ajustes de color para mejor contraste */
-  [data-theme="light"] {
-    --bg: #f8fafc; /* Color más neutro que el rosa */
-    --text: #0f172a;
-    --primary: #2563eb; /* Azul más profesional */
-    --secondary: #7c3aed;
-    --accent: #059669;
-  }
-
-  [data-theme="dark"] {
-    --bg: #0f172a;
-    --text: #f8fafc;
-    --primary: #818cf8;
-    --secondary: #a855f7;
-    --accent: #34d399;
-  }
-
-  /* Mejoras en la tipografía */
-  body {
-    font-family: "Inter", system-ui, sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Ajustes responsivos */
-  @media (max-width: 768px) {
-    section {
-      padding: 4rem 0;
-      min-height: auto;
-    }
   }
 </style>
