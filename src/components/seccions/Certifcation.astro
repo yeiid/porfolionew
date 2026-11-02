@@ -1,136 +1,287 @@
 ---
 import TranslatedText from "../TranslatedText.svelte";
 
-const certifications = [
-  { 
-    id: 1,
-    type: 'experience',
-    titleKey: 'certFreelanceTitle',
-    descKey: 'certFreelanceDesc',
-    year: '2020',
-    icon: '💼'
+interface ExperienceItem {
+  id: string;
+  roleKey: string;
+  company: string;
+  period: string;
+  location?: string;
+  descKey: string;
+  icon: string;
+  tags: string[];
+  badge?: string;
+}
+
+interface EducationItem {
+  id: string;
+  titleKey: string;
+  institution: string;
+  period: string;
+  duration?: string;
+  descKey: string;
+  icon: string;
+  tags: string[];
+  badge?: string;
+}
+
+const experiences: ExperienceItem[] = [
+  {
+    id: "neuraljira",
+    roleKey: "expNeuraljiraTitle",
+    company: "NeuralJIRA Studio",
+    period: "2024 - Presente",
+    location: "Bogotá, Colombia",
+    descKey: "expNeuraljiraDesc",
+    icon: "🚀",
+    tags: ["SaaS Multi-Tenant", "Next.js", "Astro", "Go", "Docker"],
+    badge: "Founder / Lead"
   },
   {
-    id: 2,
-    type: 'education',
-    titleKey: 'certPythonTitle',
-    descKey: 'certPythonDesc',
-    year: '2022',
-    icon: '🐍'
+    id: "freelance-ecotech",
+    roleKey: "expFreelanceDevTitle",
+    company: "Freelance & Proyectos Propios",
+    period: "2020 - 2024",
+    location: "Colombia",
+    descKey: "expFreelanceDevDesc",
+    icon: "💻",
+    tags: ["Python / Flask", "Flutter", "Offline-First", "SQLite", "IoT"],
+    badge: "Tech for Good"
   },
   {
-    id: 3,
-    type: 'experience',
-    titleKey: 'certFullstackTitle',
-    descKey: 'certFullstackDesc',
-    year: '2019-2020',
-    icon: '👨💻'
+    id: "sodef",
+    roleKey: "expSodefTitle",
+    company: "SODEF SAS",
+    period: "9 meses",
+    descKey: "expSodefDesc",
+    icon: "🏭",
+    tags: ["Gestión Técnica", "Seguridad Química", "Salud Pública"],
+    badge: "Técnico"
   },
   {
-    id: 4,
-    type: 'education',
-    titleKey: 'certReactTitle',
-    descKey: 'certReactDesc',
-    year: '2021',
-    icon: '⚛️'
-  },
-  {
-    id: 5,
-    type: 'experience',
-    titleKey: 'certWebDevTitle',
-    descKey: 'certWebDevDesc',
-    year: '2021',
-    icon: '💻'
+    id: "servi170",
+    roleKey: "expServiTitle",
+    company: "SERVI170 SAS",
+    period: "1 año 3 meses",
+    location: "Bogotá",
+    descKey: "expServiDesc",
+    icon: "🔧",
+    tags: ["Maquinaria Automotriz", "Balanceo", "Calibración"],
+    badge: "Operario"
   }
 ];
 
-const experiences = certifications.filter(cert => cert.type === 'experience');
-const educations = certifications.filter(cert => cert.type === 'education');
+const educations: EducationItem[] = [
+  {
+    id: "oracle-one",
+    titleKey: "eduOneTitle",
+    institution: "Oracle + Alura Latam",
+    period: "Octubre 2023 - Diciembre 2023",
+    duration: "331 horas · 6 formaciones",
+    descKey: "eduOneDesc",
+    icon: "☕",
+    tags: ["Java", "Spring Boot", "SQL Relacional", "POO"],
+    badge: "Oracle Certified"
+  },
+  {
+    id: "mision-tic",
+    titleKey: "eduMisionTicTitle",
+    institution: "MinTIC × Universidad Pontificia Bolivariana",
+    period: "Junio 2021 - Diciembre 2021",
+    duration: "600 horas de intensidad",
+    descKey: "eduMisionTicDesc",
+    icon: "🏛️",
+    tags: ["Desarrollo de Software", "Python", "Java", "Algoritmos"],
+    badge: "MinTIC & UPB"
+  },
+  {
+    id: "sena",
+    titleKey: "eduSenaTitle",
+    institution: "SENA - Centro Agroempresarial y Acuícola",
+    period: "Abril 2018 - Abril 2020 (Título 2022)",
+    duration: "Carrera Tecnológica",
+    descKey: "eduSenaDesc",
+    icon: "🌿",
+    tags: ["Gestión de Recursos", "Sistemas", "Datos Ecológicos"],
+    badge: "Tecnólogo SENA"
+  },
+  {
+    id: "bachiller",
+    titleKey: "eduBachillerTitle",
+    institution: "I.E. Nuestra Señora del Carmen (Hatonuevo, La Guajira)",
+    period: "Febrero 2010 - Diciembre 2016",
+    duration: "Educación Media",
+    descKey: "eduBachillerDesc",
+    icon: "🎓",
+    tags: ["Bachiller Académico", "Hatonuevo"],
+    badge: "Bachiller"
+  }
+];
 
 const journeyEvents = [
   { year: "2014", titleKey: "journey2014Title", descKey: "journey2014Desc", icon: "💡", color: "var(--accent)" },
   { year: "2015", titleKey: "journey2015Title", descKey: "journey2015Desc", icon: "🐍", color: "var(--electric)" },
   { year: "2016", titleKey: "journey2016Title", descKey: "journey2016Desc", icon: "🎓", color: "var(--green)" },
-  { year: "2017", titleKey: "journey2017Title", descKey: "journey2017Desc", icon: "🎓", color: "var(--green)" },
+  { year: "2017", titleKey: "journey2017Title", descKey: "journey2017Desc", icon: "🔬", color: "var(--green)" },
   { year: "2018", titleKey: "journey2018Title", descKey: "journey2018Desc", icon: "📚", color: "var(--electric)" },
   { year: "2020", titleKey: "journey2020Title", descKey: "journey2020Desc", icon: "⚡", color: "var(--accent)" },
-  { year: "2022", titleKey: "journey2022Title", descKey: "journey2022Desc", icon: "🏆", color: "var(--green)" },
-  { year: "2023", titleKey: "journey2023Title", descKey: "journey2023Desc", icon: "🌎", color: "var(--electric)" },
+  { year: "2021", titleKey: "journey2021Title", descKey: "journey2021Desc", icon: "🏛️", color: "var(--brand-cyan)" },
+  { year: "2023", titleKey: "journey2023Title", descKey: "journey2023Desc", icon: "☕", color: "var(--electric)" },
   { year: "2024", titleKey: "journey2024Title", descKey: "journey2024Desc", icon: "🚀", color: "var(--accent)" },
-  { year: "2025", titleKey: "journey2025Title", descKey: "journey2025Desc", icon: "🤖", color: "var(--electric)" },
+  { year: "2025", titleKey: "journey2025Title", descKey: "journey2025Desc", icon: "🤖", color: "var(--brand-cyan)" },
   { year: "2026", titleKey: "journey2026Title", descKey: "journey2026Desc", icon: "🎯", color: "var(--green)" },
 ];
 ---
 
 <section id="certifications" class="certifications-section">
   <div class="container">
-    <h2 class="section-title">
-      <TranslatedText key="careerTitle" fallback="Career" client:load />
-    </h2>
+    <div class="section-header">
+      <h2 class="section-title">
+        <TranslatedText key="careerTitle" fallback="Trayectoria" client:load />
+      </h2>
+      <p class="section-subtitle">
+        Experiencia laboral comprobada, certificaciones oficiales y mi evolución técnica continua.
+      </p>
+    </div>
     
     <div class="slider">
-      <input type="radio" name="slider" id="slide-experience" checked>
-      <input type="radio" name="slider" id="slide-education">
-      <input type="radio" name="slider" id="slide-journey">
+      <input type="radio" name="career-slider" id="slide-experience" checked>
+      <input type="radio" name="career-slider" id="slide-education">
+      <input type="radio" name="career-slider" id="slide-journey">
       
       <div class="slider-nav">
         <label for="slide-experience" class="nav-btn">
-          <TranslatedText key="experience" fallback="Experience" client:load />
+          <span class="btn-icon">💼</span>
+          <TranslatedText key="experience" fallback="Experiencia" client:load />
+          <span class="badge-count">{experiences.length}</span>
         </label>
         <label for="slide-education" class="nav-btn">
-          <TranslatedText key="education" fallback="Education" client:load />
+          <span class="btn-icon">🎓</span>
+          <TranslatedText key="education" fallback="Educación" client:load />
+          <span class="badge-count">{educations.length}</span>
         </label>
         <label for="slide-journey" class="nav-btn">
-          <TranslatedText key="journeyTab" fallback="My Journey" client:load />
+          <span class="btn-icon">🧭</span>
+          <TranslatedText key="journeyTab" fallback="Mi Camino" client:load />
+          <span class="badge-count">{journeyEvents.length}</span>
         </label>
       </div>
       
       <div class="slides">
-        <!-- Slide Experience -->
+        <!-- Slide 1: Experience -->
         <div class="slide slide-cards">
-          {experiences.map((cert, index) => (
-            <div class="cert-card" style={`--delay: ${index * 0.1}s`}>
-              <div class="cert-content">
-                <span class="cert-icon">{cert.icon}</span>
-                <div class="cert-text">
-                  <h3 class="cert-title">
-                    <TranslatedText key={cert.titleKey} fallback="" client:load />
-                  </h3>
-                  <p class="cert-year">{cert.year} - <TranslatedText key="present" fallback="Present" client:load /></p>
-                  <p class="cert-description">
-                    <TranslatedText key={cert.descKey} fallback="" client:load />
-                  </p>
+          <div class="cards-grid">
+            {experiences.map((exp, index) => (
+              <article class="trajectory-card" style={`--delay: ${index * 0.1}s`}>
+                {exp.badge && (
+                  <span class="card-badge exp-badge">{exp.badge}</span>
+                )}
+                
+                <header class="card-top">
+                  <div class="icon-box">
+                    <span class="item-icon">{exp.icon}</span>
+                  </div>
+                  <div class="card-main-meta">
+                    <h3 class="item-title">
+                      <TranslatedText key={exp.roleKey} fallback={exp.roleKey} client:load />
+                    </h3>
+                    <h4 class="item-entity">{exp.company}</h4>
+                  </div>
+                </header>
+
+                <div class="meta-row">
+                  <span class="meta-pill period-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="meta-icon">
+                      <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
+                    </svg>
+                    {exp.period}
+                  </span>
+                  {exp.location && (
+                    <span class="meta-pill location-pill">
+                      <svg viewBox="0 0 20 20" fill="currentColor" class="meta-icon">
+                        <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.742 11.742 0 001.04 572l.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" />
+                      </svg>
+                      {exp.location}
+                    </span>
+                  )}
                 </div>
-              </div>
-            </div>
-          ))}
+
+                <p class="item-description">
+                  <TranslatedText key={exp.descKey} fallback="" client:load />
+                </p>
+
+                <div class="tags-container">
+                  {exp.tags.map(tag => (
+                    <span class="tech-tag">{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
         
-        <!-- Slide Education -->
+        <!-- Slide 2: Education & Certifications -->
         <div class="slide slide-cards">
-          {educations.map((cert, index) => (
-            <div class="cert-card" style={`--delay: ${index * 0.1}s`}>
-              <div class="cert-content">
-                <span class="cert-icon">{cert.icon}</span>
-                <div class="cert-text">
-                  <h3 class="cert-title">
-                    <TranslatedText key={cert.titleKey} fallback="" client:load />
-                  </h3>
-                  <p class="cert-year">{cert.year}</p>
-                  <p class="cert-description">
-                    <TranslatedText key={cert.descKey} fallback="" client:load />
-                  </p>
+          <div class="cards-grid">
+            {educations.map((edu, index) => (
+              <article class="trajectory-card edu-card" style={`--delay: ${index * 0.1}s`}>
+                {edu.badge && (
+                  <span class="card-badge edu-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="badge-icon">
+                      <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    {edu.badge}
+                  </span>
+                )}
+                
+                <header class="card-top">
+                  <div class="icon-box edu-icon-box">
+                    <span class="item-icon">{edu.icon}</span>
+                  </div>
+                  <div class="card-main-meta">
+                    <h3 class="item-title">
+                      <TranslatedText key={edu.titleKey} fallback={edu.titleKey} client:load />
+                    </h3>
+                    <h4 class="item-entity">{edu.institution}</h4>
+                  </div>
+                </header>
+
+                <div class="meta-row">
+                  <span class="meta-pill period-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="meta-icon">
+                      <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
+                    </svg>
+                    {edu.period}
+                  </span>
+                  {edu.duration && (
+                    <span class="meta-pill duration-pill">
+                      <svg viewBox="0 0 20 20" fill="currentColor" class="meta-icon">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd" />
+                      </svg>
+                      {edu.duration}
+                    </span>
+                  )}
                 </div>
-              </div>
-            </div>
-          ))}
+
+                <p class="item-description">
+                  <TranslatedText key={edu.descKey} fallback="" client:load />
+                </p>
+
+                <div class="tags-container">
+                  {edu.tags.map(tag => (
+                    <span class="tech-tag">{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <!-- Slide Journey -->
+        <!-- Slide 3: Journey Timeline -->
         <div class="slide slide-journey">
           <div class="journey-timeline">
             {journeyEvents.map((event, index) => (
-              <div class="journey-item" style={`--delay: ${index * 0.08}s; --event-color: ${event.color}`}>
+              <div class="journey-item" style={`--delay: ${index * 0.06}s; --event-color: ${event.color}`}>
                 <div class="journey-dot">
                   <span class="journey-icon">{event.icon}</span>
                 </div>
@@ -155,24 +306,39 @@ const journeyEvents = [
 <style>
   .certifications-section {
     padding: 6rem 1rem;
-    background: rgba(var(--primary-rgb), 0.03);
+    position: relative;
+    background: radial-gradient(circle at 50% 100%, rgba(var(--brand-cyan-rgb), 0.04) 0%, transparent 60%);
   }
 
   .container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
   }
 
-  .section-title {
+  .section-header {
     text-align: center;
     margin-bottom: 3rem;
-    font-size: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
-  /* Slider */
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Slider Navigation */
   .slider {
     position: relative;
     overflow: hidden;
@@ -185,34 +351,60 @@ const journeyEvents = [
   .slider-nav {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
   }
 
   .nav-btn {
     cursor: pointer;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    background: rgba(var(--primary-rgb), 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.6rem;
+    border-radius: 9999px;
+    background: var(--panel);
+    border: 1px solid var(--border);
     color: var(--text);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
-    border: 2px solid transparent;
+    font-size: 0.95rem;
+    font-family: var(--font-display);
   }
 
   .nav-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
+    border-color: var(--brand-cyan);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(var(--brand-cyan-rgb), 0.2);
+  }
+
+  .badge-count {
+    background: rgba(var(--text-rgb), 0.1);
+    color: var(--text);
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
   }
 
   #slide-experience:checked ~ .slider-nav label[for="slide-experience"],
   #slide-education:checked ~ .slider-nav label[for="slide-education"],
   #slide-journey:checked ~ .slider-nav label[for="slide-journey"] {
-    background: var(--primary);
-    color: var(--bg);
-    border-color: rgba(var(--secondary-rgb), 0.3);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: var(--ink);
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.35);
   }
 
+  #slide-experience:checked ~ .slider-nav label[for="slide-experience"] .badge-count,
+  #slide-education:checked ~ .slider-nav label[for="slide-education"] .badge-count,
+  #slide-journey:checked ~ .slider-nav label[for="slide-journey"] .badge-count {
+    background: rgba(var(--ink-rgb), 0.25);
+    color: var(--ink);
+  }
+
+  /* Slides */
   .slides {
     display: flex;
     width: 300%;
@@ -229,141 +421,244 @@ const journeyEvents = [
 
   .slide {
     width: 33.333%;
-    padding: 1rem;
-    max-height: 520px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--panel);
+    padding: 0.5rem 1rem 2rem;
+    box-sizing: border-box;
   }
 
-  .slide::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .slide::-webkit-scrollbar-track {
-    background: var(--panel);
-    border-radius: 3px;
-  }
-
-  .slide::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 3px;
-  }
-
-  .slide-cards {
+  /* Cards Grid */
+  .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
   }
 
-  /* Cert Cards */
-  .cert-card {
-    background: var(--bg);
-    padding: 1.5rem;
+  /* Trajectory Card */
+  .trajectory-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: cardEntrance 0.6s ease var(--delay) forwards;
+    padding: 1.75rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: cardEntrance 0.5s ease var(--delay) both;
   }
 
   @keyframes cardEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  .cert-card:hover {
+  .trajectory-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    border-color: rgba(var(--brand-cyan-rgb), 0.4);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3), 0 0 16px rgba(var(--brand-cyan-rgb), 0.15);
   }
 
-  .cert-content {
-    display: flex;
+  .trajectory-card.edu-card:hover {
+    border-color: rgba(var(--electric-rgb), 0.5);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3), 0 0 18px rgba(var(--electric-rgb), 0.2);
+  }
+
+  /* Card Badge */
+  .card-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(8px);
   }
 
-  .cert-icon {
-    font-size: 2rem;
-    min-width: 60px;
-    height: 60px;
+  .exp-badge {
+    background: rgba(var(--accent-rgb), 0.15);
+    color: var(--accent2);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+  }
+
+  .edu-badge {
+    background: rgba(var(--brand-cyan-rgb), 0.15);
+    color: var(--brand-cyan);
+    border: 1px solid rgba(var(--brand-cyan-rgb), 0.3);
+  }
+
+  .badge-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  /* Card Top */
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-right: 5rem;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(var(--primary-rgb), 0.1);
-    border-radius: 12px;
+    font-size: 1.6rem;
+    flex-shrink: 0;
     transition: transform 0.3s ease;
   }
 
-  .cert-card:hover .cert-icon {
-    transform: rotate(15deg) scale(1.1);
+  .edu-icon-box {
+    background: rgba(var(--brand-cyan-rgb), 0.1);
+    border-color: rgba(var(--brand-cyan-rgb), 0.25);
   }
 
-  .cert-text { flex: 1; }
-
-  .cert-title {
-    color: var(--primary);
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+  .trajectory-card:hover .icon-box {
+    transform: rotate(8deg) scale(1.08);
   }
 
-  .cert-year {
-    color: var(--text);
-    opacity: 0.8;
+  .card-main-meta {
+    flex: 1;
+  }
+
+  .item-title {
+    font-size: 1.15rem;
+    color: var(--white);
+    margin: 0 0 0.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .item-entity {
     font-size: 0.9rem;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 600;
   }
 
-  .cert-description {
-    margin-top: 0.8rem;
+  .edu-card .item-entity {
+    color: var(--brand-cyan);
+  }
+
+  /* Meta Row */
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    background: rgba(var(--ink-rgb), 0.6);
+    border: 1px solid var(--border);
     color: var(--text);
+  }
+
+  .meta-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--muted);
+  }
+
+  .period-pill {
+    color: var(--light);
+    font-weight: 500;
+  }
+
+  .duration-pill {
+    color: var(--brand-cyan);
+    border-color: rgba(var(--brand-cyan-rgb), 0.25);
+  }
+
+  /* Description */
+  .item-description {
+    font-size: 0.88rem;
     line-height: 1.6;
-    font-size: 0.95rem;
+    color: var(--text);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  /* Tags */
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(var(--border-rgb), 0.6);
+  }
+
+  .tech-tag {
+    background: rgba(var(--text-rgb), 0.08);
+    color: var(--text);
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    font-size: 0.73rem;
+    font-weight: 500;
   }
 
   /* Journey Timeline */
   .slide-journey {
-    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
   }
 
   .journey-timeline {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 700px;
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
   }
 
   .journey-timeline::before {
-    content: "";
+    content: '';
     position: absolute;
-    left: 23px;
+    left: 24px;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(
-      to bottom,
-      var(--primary) 0%,
-      var(--electric) 50%,
-      var(--green) 100%
-    );
-    opacity: 0.3;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--brand-cyan) 50%, var(--green) 100%);
+    border-radius: 2px;
   }
 
   .journey-item {
+    position: relative;
     display: flex;
     align-items: flex-start;
-    gap: 1.25rem;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: journeyFadeIn 0.4s ease var(--delay) forwards;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-left: 0.5rem;
+    animation: timelineItemIn 0.5s ease var(--delay) both;
   }
 
-  @keyframes journeyFadeIn {
+  @keyframes timelineItemIn {
+    from {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
     to {
       opacity: 1;
       transform: translateX(0);
@@ -371,152 +666,90 @@ const journeyEvents = [
   }
 
   .journey-dot {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background: var(--panel);
-    border: 2px solid var(--event-color, var(--accent));
+    border: 2px solid var(--event-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    z-index: 2;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease;
   }
 
   .journey-item:hover .journey-dot {
     transform: scale(1.15);
-    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
-  }
-
-  .journey-icon {
-    font-size: 1.1rem;
   }
 
   .journey-card {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
     flex: 1;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease;
   }
 
-  .journey-card:hover {
-    border-color: var(--event-color, var(--accent));
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  .journey-item:hover .journey-card {
+    transform: translateX(4px);
+    border-color: var(--event-color);
   }
 
   .journey-year {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--event-color, var(--accent));
-    background: rgba(var(--accent-rgb), 0.1);
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.05em;
+    color: var(--event-color);
+    background: rgba(var(--panel-rgb), 0.8);
+    margin-bottom: 0.35rem;
   }
 
   .journey-title {
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 1.1rem;
     color: var(--white);
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.4rem;
+    font-weight: 700;
   }
 
   .journey-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.5;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.55;
     margin: 0;
   }
 
-  /* Responsive */
   @media (max-width: 768px) {
-    .section-title { font-size: 2rem; }
-
-    .slider-nav {
-      flex-direction: column;
-      align-items: center;
+    .certifications-section {
+      padding: 4rem 0.75rem;
     }
-
-    .nav-btn {
-      width: 100%;
-      max-width: 280px;
-      text-align: center;
+    .section-title {
+      font-size: 2.1rem;
     }
-
-    .slide-cards {
+    .cards-grid {
       grid-template-columns: 1fr;
     }
-
-    .cert-content {
-      flex-direction: column;
-      align-items: flex-start;
+    .card-top {
+      padding-right: 0;
     }
-
-    .cert-icon {
-      width: 50px;
-      height: 50px;
-      font-size: 1.8rem;
+    .card-badge {
+      position: static;
+      align-self: flex-start;
+      margin-bottom: 0.5rem;
     }
-
-    .journey-timeline::before {
-      left: 20px;
+    .trajectory-card {
+      padding: 1.25rem;
     }
-
-    .journey-dot {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
+    .slider-nav {
+      gap: 0.5rem;
     }
-
-    .journey-icon { font-size: 1rem; }
-
-    .journey-card { padding: 0.8rem 1rem; }
-    .journey-title { font-size: 0.9rem; }
-    .journey-desc { font-size: 0.8rem; }
-  }
-
-  @media (max-width: 480px) {
-    .certifications-section { padding: 4rem 1rem; }
-    .section-title { font-size: 1.8rem; }
-    .cert-card { padding: 1.2rem; }
-    .cert-icon { width: 45px; height: 45px; font-size: 1.5rem; }
+    .nav-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
   }
 </style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.slider');
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', e => {
-      touchStartX = e.touches[0].clientX;
-    });
-
-    slider.addEventListener('touchmove', e => {
-      touchEndX = e.touches[0].clientX;
-    });
-
-    slider.addEventListener('touchend', () => {
-      const diffX = touchStartX - touchEndX;
-      if (Math.abs(diffX) > 50) {
-        const isExperience = document.getElementById('slide-experience').checked;
-        const isEducation = document.getElementById('slide-education').checked;
-        if (diffX > 0) {
-          if (isExperience) document.getElementById('slide-education').checked = true;
-          else if (isEducation) document.getElementById('slide-journey').checked = true;
-        } else {
-          if (isEducation) document.getElementById('slide-experience').checked = true;
-          else if (!isEducation && !isExperience) document.getElementById('slide-education').checked = true;
-          else document.getElementById('slide-experience').checked = true;
-        }
-      }
-    });
-  });
-</script>

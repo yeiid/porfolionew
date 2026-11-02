@@ -59,6 +59,9 @@ import TranslatedText from "../TranslatedText.svelte";
 
       <div class="hero-right">
         <div class="profile-image-wrapper">
+          <div class="brand-monogram-badge" title="Yeifran David Hernández Iguarán">
+            <img src="/logo-monogram-trans.png" alt="Monograma YH" width="34" height="34" />
+          </div>
           <img
             src="/perfil.png"
             alt="Yeifran Hernandez - Full Stack Developer"
@@ -209,6 +212,35 @@ import TranslatedText from "../TranslatedText.svelte";
       0 0 0 4px rgba(var(--accent-rgb), 0.25),
       0 0 50px rgba(var(--accent-rgb), 0.4),
       0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  .brand-monogram-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(var(--ink-rgb), 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--brand-cyan-rgb), 0.45);
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(var(--brand-cyan-rgb), 0.35);
+    z-index: 2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .brand-monogram-badge:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 25px rgba(var(--brand-cyan-rgb), 0.65);
+  }
+
+  .brand-monogram-badge img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   .status-badge {

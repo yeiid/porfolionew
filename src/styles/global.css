@@ -14,27 +14,31 @@
   --light:     #E2E8F0;
   --white:     #F8FAFC;
 
-  /* ── Colores de acento NeuralJira ── */
-  --accent:    #F97316;
-  --accent2:   #FB923C;
-  --electric:  #38BDF8;
-  --green:     #34D399;
-  --red:       #F87171;
+  /* ── Colores de acento NeuralJira & Marca Personal ── */
+  --accent:            #F97316;
+  --accent2:           #FB923C;
+  --electric:          #38BDF8;
+  --green:             #34D399;
+  --red:               #F87171;
+  --brand-cyan:        #0DECC8;
+  --brand-cyan-rgb:    13, 236, 200;
+  --brand-electric:    #01EDEB;
+  --brand-electric-rgb: 1, 237, 235;
 
   /* ── RGB variants for rgba() usage ── */
-  --ink-rgb:       11, 15, 26;
-  --deep-rgb:      17, 24, 39;
-  --panel-rgb:     26, 34, 53;
-  --border-rgb:    37, 46, 66;
-  --muted-rgb:     74, 85, 104;
-  --text-rgb:      203, 213, 225;
-  --light-rgb:     226, 232, 240;
-  --white-rgb:     248, 250, 252;
-  --accent-rgb:    249, 115, 22;
-  --accent2-rgb:   251, 146, 60;
-  --electric-rgb:  56, 189, 248;
-  --green-rgb:     52, 211, 153;
-  --red-rgb:       248, 113, 113;
+  --ink-rgb:           11, 15, 26;
+  --deep-rgb:          17, 24, 39;
+  --panel-rgb:         26, 34, 53;
+  --border-rgb:        37, 46, 66;
+  --muted-rgb:         74, 85, 104;
+  --text-rgb:          203, 213, 225;
+  --light-rgb:         226, 232, 240;
+  --white-rgb:         248, 250, 252;
+  --accent-rgb:        249, 115, 22;
+  --accent2-rgb:       251, 146, 60;
+  --electric-rgb:      56, 189, 248;
+  --green-rgb:         52, 211, 153;
+  --red-rgb:           248, 113, 113;
 
   /* ── Tipografías ── */
   --font-display: 'Space Grotesk', sans-serif;

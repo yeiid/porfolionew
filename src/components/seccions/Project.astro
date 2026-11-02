@@ -1,235 +1,68 @@
 ---
-import { Image } from "astro:assets";
 import TranslatedText from "../TranslatedText.svelte";
-
-interface Project {
-  title: string;
-  image: string;
-  descKey: string;
-  link: string;
-  github?: string;
-  technologies: string[];
-  altKey: string;
-  isFounder?: boolean;
-  badgeKey?: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "NeuralJIRA",
-    image: "/ecoraices-web.png",
-    descKey: "projectNeuraljiraDesc",
-    link: "https://neuraljira.tech",
-    github: undefined,
-    technologies: ["Astro", "Markdown", "Vercel"],
-    altKey: "projectAlt",
-    isFounder: true,
-    badgeKey: "founderProject"
-  },
-  {
-    title: "EcoRaíces",
-    image: "/ecoraices-web.png",
-    descKey: "projectEcoraicesDesc",
-    link: "https://ecoraices-proyect.vercel.app/",
-    technologies: ["Next.js", "React", "Prisma", "SQLite", "NextAuth"],
-    altKey: "projectAlt"
-  },
-  {
-    title: "GynTrack",
-    image: "/gyntrack.png",
-    descKey: "projectGyntrackDesc",
-    link: "https://demo-html-five.vercel.app/",
-    technologies: ["Python", "Flask", "PyInstaller", "SQLite"],
-    altKey: "projectAlt"
-  },
-  {
-    title: "Jamuche",
-    image: "/jamuche.png",
-    descKey: "projectJamucheDesc",
-    link: "https://jamuchee.vercel.app/",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
-    altKey: "projectAlt"
-  }
-];
+import ProjectsFilter from "../ProjectsFilter.svelte";
 ---
 
 <section id="projects" class="projects-section">
-  <h2 class="section-title">
-    <TranslatedText key="projectsTitle" fallback="Projects" client:load />
-  </h2>
-  <div class="projects-grid">
-    {projects.map((project, index) => (
-      <a 
-        href={project.link} 
-        class={`project-card ${project.isFounder ? 'founder-card' : ''}`}
-        style={`--delay: ${index * 0.2}s`}
-        target="_blank" 
-        rel="noopener noreferrer"
-      >
-        {project.isFounder && (
-          <div class="founder-badge">
-            <TranslatedText key={project.badgeKey} fallback="Founder Project" client:load />
-          </div>
-        )}
-        <header class="project-header">
-          <h3 class="project-title">{project.title}</h3>
-        </header>
-        <figure class="project-image">
-          <Image src={project.image} 
-          alt={`Vista previa del proyecto ${project.title}`} 
-          format="ico" 
-          width={350} height={220}
-          loading="lazy"  />
-        </figure>
-        <div class="project-content">
-          <div class="tech-tags">
-            {project.technologies.map(tech => (
-              <span class="tech-tag">{tech}</span>
-            ))}
-          </div>
-          <p class="project-description">
-            <TranslatedText key={project.descKey} fallback={project.title} client:load />
-          </p>
-        </div>
-      </a>
-    ))}
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <TranslatedText key="projectsTitle" fallback="Proyectos" client:load />
+      </h2>
+      <p class="section-subtitle">
+        Sistemas distribuidos, arquitecturas local-first, IA en el Edge y plataformas SaaS en producción.
+      </p>
+    </div>
+    
+    <ProjectsFilter client:load />
   </div>
 </section>
 
 <style>
   .projects-section {
-    padding: 4rem 0;
+    padding: 6rem 0;
+    position: relative;
+    background: radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), 0.04) 0%, transparent 60%);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
   }
 
   .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 0 1rem;
-  }
-
-  .project-card {
-    background: var(--bg);
-    border: 1px solid rgba(var(--primary-rgb), 0.1);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease-in-out;
-    animation: cardFadeIn 0.6s ease var(--delay) both;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-  }
-
-  .project-card.founder-card {
-    border: 1px solid rgba(var(--accent-rgb), 0.3);
-    background: linear-gradient(135deg, var(--panel) 0%, rgba(var(--accent-rgb), 0.05) 100%);
-  }
-
-  .founder-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--accent);
-    color: var(--ink);
-    padding: 0.3rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    z-index: 3;
-  }
-
-  @keyframes cardFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
-  }
-
-  .project-card.founder-card:hover {
-    box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.3);
-  }
-
-  .project-header {
-    padding: 0.8rem;
-  }
-
-  .project-title {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--primary);
-  }
-
-  .project-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .project-content {
-    padding: 0.8rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .tech-tag {
-    background: var(--secondary);
-    color: white;
-    padding: 0.2rem 0.4rem;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-
-  .project-description {
-    margin: 0;
-    line-height: 1.5; 
-    text-align: left;
-    font-size: 0.9rem;
-    color: var(--text);
-    opacity: 0.9;
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
   @media (max-width: 768px) {
     .projects-section {
-      padding: 3rem 0;
+      padding: 4rem 0;
     }
     .section-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: 2.1rem;
     }
-    .projects-grid {
-      gap: 1rem;
+    .section-subtitle {
+      font-size: 0.95rem;
     }
   }
 </style>

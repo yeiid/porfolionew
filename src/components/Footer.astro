@@ -35,12 +35,31 @@ const currentYear = new Date().getFullYear();
           />
         </h3>
         <div class="tech-list">
-          <span class="tech-item">AI/ML</span>
+          <span class="tech-item">AI / Edge</span>
+          <span class="tech-item">Go (Golang)</span>
+          <span class="tech-item">Local-First</span>
+          <span class="tech-item">Three.js 3D</span>
+          <span class="tech-item">Svelte</span>
+          <span class="tech-item">Astro</span>
           <span class="tech-item">React</span>
           <span class="tech-item">Python</span>
-          <span class="tech-item">Node.js</span>
-          <span class="tech-item">Astro</span>
-          <span class="tech-item">Svelte</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-brand-row">
+      <div class="brand-badge">
+        <img
+          src="/logo-monogram-trans.png"
+          alt="Yeifran David Hernández Iguarán"
+          class="footer-brand-logo"
+          width="40"
+          height="40"
+          loading="lazy"
+        />
+        <div class="footer-brand-text">
+          <span class="footer-brand-name">YEIFRAN DAVID</span>
+          <span class="footer-brand-sub">HERNÁNDEZ IGUARÁN</span>
         </div>
       </div>
     </div>
@@ -149,6 +168,52 @@ const currentYear = new Date().getFullYear();
     background: var(--primary);
     color: white;
     transform: translateY(-2px);
+  }
+
+  .footer-brand-row {
+    padding: 2rem 0;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid rgba(var(--text-rgb), 0.08);
+    display: flex;
+    justify-content: center;
+  }
+
+  .brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.5rem 1.25rem;
+    background: rgba(var(--panel-rgb), 0.6);
+    border: 1px solid rgba(var(--brand-cyan-rgb), 0.2);
+    border-radius: 9999px;
+  }
+
+  .footer-brand-logo {
+    width: 2.25rem;
+    height: 2.25rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(var(--brand-cyan-rgb), 0.4));
+  }
+
+  .footer-brand-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.1;
+  }
+
+  .footer-brand-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-brand-sub {
+    font-size: 0.52rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.14em;
   }
 
   .footer-bottom {
